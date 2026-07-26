@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="fr-FR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>À propos - Free Day Parking Beauvais Aéroport</title>
+  <meta name="description" content="Découvrez l'histoire de Free Day Parking Beauvais, fondé par Johann Billard en mars 2025. Parking pas cher avec navette électrique gratuite.">
+  <meta name="robots" content="index, follow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="/logo.png">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; background: #f8fafc; color: #334155; line-height: 1.7; }
+    .gradient-bar { height: 4px; background: linear-gradient(90deg, #667eea, #764ba2, #f093fb); }
+    .gradient-bg { background: linear-gradient(135deg, #1e3a8a 0%, #3730a3 50%, #581c87 100%); }
+    .container { max-width: 900px; margin: 0 auto; padding: 2rem 1.5rem; }
+    h1 { font-size: 2.5rem; font-weight: 700; color: #1e293b; margin-bottom: 0.5rem; }
+    h2 { font-size: 1.5rem; font-weight: 600; color: #1e293b; margin-top: 2.5rem; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 2px solid #e2e8f0; }
+    p { margin-bottom: 1rem; color: #475569; }
+    strong { color: #1e293b; }
+    a { color: #667eea; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .back-link { display: inline-flex; align-items: center; gap: 0.5rem; color: #667eea; font-weight: 500; margin-bottom: 1.5rem; transition: color 0.2s; }
+    .back-link:hover { color: #764ba2; }
+    .subtitle { color: #64748b; margin-bottom: 2rem; }
+    .hero-icon { width: 80px; height: 80px; border-radius: 20px; background: linear-gradient(135deg, #667eea, #764ba2); display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; box-shadow: 0 10px 30px rgba(102,126,234,0.3); }
+    .card { background: white; border-radius: 24px; padding: 2.5rem; box-shadow: 0 4px 20px rgba(0,0,0,0.08); border: 1px solid #f1f5f9; margin-bottom: 2rem; }
+    .card-icon { width: 48px; height: 48px; border-radius: 12px; background: linear-gradient(135deg, #667eea, #764ba2); display: flex; align-items: center; justify-content: center; margin-bottom: 1rem; }
+    .portrait-container { width: 160px; height: 200px; border-radius: 16px; overflow: hidden; border: 2px solid rgba(102,126,234,0.3); box-shadow: 0 10px 40px rgba(0,0,0,0.2); flex-shrink: 0; }
+    .portrait-container img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+    .values-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 2rem; }
+    .value-card { background: white; border-radius: 16px; padding: 1.5rem; box-shadow: 0 4px 15px rgba(0,0,0,0.06); border: 1px solid #f1f5f9; }
+    .value-icon { width: 48px; height: 48px; border-radius: 12px; background: linear-gradient(135deg, #667eea, #764ba2); display: flex; align-items: center; justify-content: center; margin-bottom: 0.75rem; }
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
+    .stat-card { background: white; border-radius: 16px; padding: 1.5rem; box-shadow: 0 4px 15px rgba(0,0,0,0.06); border: 1px solid #f1f5f9; text-align: center; }
+    .stat-value { font-size: 1.5rem; font-weight: 700; background: linear-gradient(135deg, #667eea, #764ba2); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .stat-label { font-size: 0.875rem; color: #64748b; margin-top: 0.25rem; }
+    .cta-section { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 24px; padding: 3rem 2rem; text-align: center; color: white; }
+    .btn-primary { display: inline-flex; align-items: center; gap: 0.5rem; background: white; color: #764ba2; padding: 0.875rem 2rem; border-radius: 12px; font-weight: 600; text-decoration: none; box-shadow: 0 4px 15px rgba(0,0,0,0.15); transition: all 0.2s; margin: 0.5rem; }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.2); text-decoration: none; }
+    .btn-secondary { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(255,255,255,0.15); color: white; padding: 0.875rem 2rem; border-radius: 12px; font-weight: 600; text-decoration: none; border: 1px solid rgba(255,255,255,0.3); transition: all 0.2s; margin: 0.5rem; }
+    .btn-secondary:hover { background: rgba(255,255,255,0.25); text-decoration: none; }
+    .founder-section { background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); border-radius: 24px; padding: 2.5rem; color: white; }
+    .founder-section p { color: #94a3b8; }
+    .founder-section strong { color: #e2e8f0; }
+    footer { margin-top: 4rem; padding: 2rem 0; border-top: 1px solid #e2e8f0; text-align: center; color: #94a3b8; font-size: 0.875rem; }
+    @media (max-width: 640px) { h1 { font-size: 1.75rem; } .founder-section { padding: 1.5rem; } .values-grid { grid-template-columns: repeat(2, 1fr); } }
+    svg { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  </style>
+</head>
+<body>
+  <div class="gradient-bar"></div>
+  <div class="container">
+    <a href="/" class="back-link">← Retour au site</a>
+
+    <!-- Hero -->
+    <div style="text-align: center; margin-bottom: 3rem;">
+      <div class="hero-icon">
+        <svg viewBox="0 0 24 24" style="width:40px;height:40px;color:white;stroke-width:1.5;"><path d="M14 16H9m10 0h3v-3.15a1 1 0 0 0-.84-.99L16 11l-2.7-3.6a1 1 0 0 0-.8-.4H5.24a2 2 0 0 0-1.8 1.1l-.8 1.63A6 6 0 0 0 2 12.42V16h2"/><circle cx="6.5" cy="16.5" r="2.5"/><circle cx="16.5" cy="16.5" r="2.5"/></svg>
+      </div>
+      <h1>À propos de FreeDayParkingBeauvais</h1>
+      <p class="subtitle">Bienvenue chez FreeDayParkingBeauvais, où nous rendons votre voyage plus serein depuis l'aéroport de Beauvais.</p>
+    </div>
+
+    <!-- Notre Histoire -->
+    <div class="card">
+      <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:1rem;">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24" style="width:24px;height:24px;color:white;"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        </div>
+        <h2 style="margin:0;border:none;">Notre Histoire</h2>
+      </div>
+      <p><strong>FreeDayParkingBeauvais</strong> est née en <strong>mars 2025</strong>, fruit de la réflexion de son fondateur, <strong>Johann Billard</strong>. Après avoir constaté à quel point le stationnement à l'aéroport de Beauvais-Tillé pouvait être coûteux et stressant pour les voyageurs, Johann a eu une vision claire : créer une alternative abordable, sécurisée et écoresponsable.</p>
+      <p>Né de l'envie de se dépasser personnellement et de ne plus vendre sa force vitale pour réaliser le rêve d'un autre, FreeDayParkingBeauvais s'est donnée pour mission de transformer l'expérience de stationnement aéroportuaire. Notre entreprise se consacre à offrir à chaque voyageur un service fiable, transparent et à taille humaine.</p>
+      <p>Depuis nos débuts, nous avons déjà accueilli des centaines de voyageurs, cumulé <strong>67 avis 5 étoiles sur 69 sur Google</strong>, et fait la preuve qu'un parking aéroport peut être à la fois économique et de qualité.</p>
+    </div>
+
+    <!-- Notre Mission -->
+    <div class="card">
+      <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:1rem;">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24" style="width:24px;height:24px;color:white;"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+        </div>
+        <h2 style="margin:0;border:none;">Notre Mission</h2>
+      </div>
+      <p>Notre mission est de fournir une solution de stationnement complète et pratique pour les voyageurs de l'aéroport de Beauvais-Tillé. Nous proposons un parking sécurisé, clos et surveillé, accompagné d'une <strong>navette 100% électrique gratuite</strong> (pour 7 jours ou plus) qui vous dépose directement au dépose minute de l'aéroport en seulement 12 minutes.</p>
+      <p>Le but est de réduire le stress du voyage et de fournir aux voyageurs un environnement sûr pour garer leur véhicule avant de s'envoler vers leurs destinations, tout en réalisant des économies substantielles par rapport aux parkings officiels (jusqu'à <strong>70% d'économies</strong>).</p>
+    </div>
+
+    <!-- Nos Valeurs -->
+    <h2>Nos Valeurs</h2>
+    <div class="values-grid">
+      <div class="value-card">
+        <div class="value-icon">
+          <svg viewBox="0 0 24 24" style="width:24px;height:24px;color:white;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <h3 style="font-size:1.1rem;font-weight:600;color:#1e293b;margin-bottom:0.5rem;">Sécurité</h3>
+        <p style="font-size:0.875rem;color:#64748b;margin:0;">Parking clos, portail électrique, caméras de surveillance et photos de votre véhicule sur demande.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">
+          <svg viewBox="0 0 24 24" style="width:24px;height:24px;color:white;"><path d="M17 8h1a4 4 0 1 1 0 8h-1M3 8h14v8H3zM6 1v3M10 1v3M14 1v3"/></svg>
+        </div>
+        <h3 style="font-size:1.1rem;font-weight:600;color:#1e293b;margin-bottom:0.5rem;">Écoresponsabilité</h3>
+        <p style="font-size:0.875rem;color:#64748b;margin:0;">Navette 100% électrique, entreprise locale à taille humaine, engagement pour réduire notre empreinte carbone.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">
+          <svg viewBox="0 0 24 24" style="width:24px;height:24px;color:white;"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        </div>
+        <h3 style="font-size:1.1rem;font-weight:600;color:#1e293b;margin-bottom:0.5rem;">Service personnalisé</h3>
+        <p style="font-size:0.875rem;color:#64748b;margin:0;">À votre écoute, aide avec les valises, accueil chaleureux. Chaque client est unique.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">
+          <svg viewBox="0 0 24 24" style="width:24px;height:24px;color:white;"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <h3 style="font-size:1.1rem;font-weight:600;color:#1e293b;margin-bottom:0.5rem;">Transparence</h3>
+        <p style="font-size:0.875rem;color:#64748b;margin:0;">Tarifs clairs, pas de frais cachés. Ce que vous voyez est ce que vous payez.</p>
+      </div>
+    </div>
+
+    <!-- Notre clientèle cible -->
+    <div class="card">
+      <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:1rem;">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24" style="width:24px;height:24px;color:white;"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <h2 style="margin:0;border:none;">Notre clientèle cible</h2>
+      </div>
+      <p><strong>Ce service s'adresse à tous les voyageurs, quel que soit leur horaire.</strong> Notre navette 100% électrique est disponible <strong>24h/24, 7 jours sur 7</strong>, y compris les jours fériés. Que votre départ soit à l'aube ou que votre retour soit au milieu de la nuit, nous assurons votre transfert vers et depuis l'aéroport de Beauvais-Tillé à toute heure.</p>
+      <p>Ce qui rend notre offre unique, c'est que <strong>nous ne facturons aucun frais supplémentaire en cas de retard de vol</strong>. Ainsi, que vous partiez très tôt ou que vous arriviez très tard, FreeDayParking Beauvais est conçu pour vous offrir une solution fiable, sécurisée et sans contrainte, adaptée à vos besoins spécifiques.</p>
+    </div>
+
+    <!-- Johann Billard -->
+    <div class="founder-section">
+      <div style="display:flex;flex-direction:column;align-items:center;gap:1.5rem;">
+        <div class="portrait-container">
+          <img src="/johann-original.jpg" alt="Johann Billard, fondateur de FreeDayParkingBeauvais" style="width:100%;height:100%;object-fit:cover;object-position:top;" />
+        </div>
+        <div style="text-align:center;">
+          <h2 style="color:white;border:none;margin:0 0 0.25rem 0;">Johann Billard</h2>
+          <p style="color:#a78bfa;font-weight:500;margin:0 0 1rem 0;">Fondateur de FreeDayParkingBeauvais</p>
+          <p>Je suis Johann Billard, fondateur de Free Day Parking Beauvais. Mon parcours personnel m'a conduit à créer un service pensé pour les voyageurs qui recherchent davantage de liberté, de simplicité et de flexibilité. Très tôt, j'ai compris qu'il existait souvent une autre manière de faire les choses : plus humaine, plus directe et plus adaptée aux besoins réels des personnes.</p>
+          <p>L'auto-apprentissage a profondément façonné ma vision du monde. Apprendre par soi-même, expérimenter, construire et évoluer constamment m'a permis de transformer des idées simples en projets concrets.</p>
+          <p>Cette passion pour entreprendre et partager est aujourd'hui au cœur de FreeDayParking Beauvais. Pour moi, créer un service utile ne se limite pas à proposer un parking : il s'agit aussi d'apporter une solution fiable, accessible et pensée pour faciliter le quotidien des voyageurs, notamment ceux qui partent très tôt ou rentrent très tard.</p>
+          <p>Je crois profondément qu'une passion peut devenir une véritable source d'accomplissement lorsqu'elle est mise au service des autres. Lorsque l'on construit quelque chose qui a du sens, le travail devient avant tout une aventure personnelle.</p>
+          <p>Si vous vous reconnaissez dans cette vision, celle de sortir des chemins classiques, d'oser créer votre propre voie et de vivre selon vos convictions, alors nous partageons probablement le même état d'esprit.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stats -->
+    <div style="margin-top:2rem;">
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-value">Mars 2025</div>
+          <div class="stat-label">Date de création</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">67</div>
+          <div class="stat-label">avis 5 étoiles Google</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">70%</div>
+          <div class="stat-label">d'économies vs officiel</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">12 min</div>
+          <div class="stat-label">de navette aéroport</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="cta-section">
+      <h2 style="font-size:1.75rem;margin-bottom:0.75rem;">Prêt à voyager l'esprit tranquille ?</h2>
+      <p style="color:rgba(255,255,255,0.8);max-width:500px;margin:0 auto 1.5rem;">Rejoignez les centaines de voyageurs qui nous font confiance. Réservez votre place de parking à l'aéroport de Beauvais dès maintenant.</p>
+      <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:0.5rem;">
+        <a href="/" class="btn-primary">Réserver ma place →</a>
+        <a href="https://wa.me/33689826515" target="_blank" class="btn-secondary">📱 Me contacter sur WhatsApp</a>
+      </div>
+    </div>
+
+    <footer>
+      <p>© 2026 Free Day Parking Beauvais — Parking Aéroport Beauvais-Tillé (BVA)</p>
+      <p><a href="/">← Retour au site</a></p>
+    </footer>
+  </div>
+</body>
+</html>

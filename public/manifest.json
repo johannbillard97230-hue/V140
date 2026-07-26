@@ -1,0 +1,23 @@
+{
+  "name": "Free Day Parking Beauvais - Parking Aéroport",
+  "short_name": "FreeDayParking",
+  "description": "Parking pas cher aéroport Beauvais-Tillé avec navette électrique gratuite. 62 avis 5 étoiles Google.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f8fafc",
+  "theme_color": "#667eea",
+  "orientation": "portrait",
+  "lang": "fr",
+  "icons": [
+    {
+      "src": "/logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "scope": "https://www.freedayparkingbeauvais.com/",
+  "categories": ["travel", "parking", "transportation"],
+  "related_applications": [],
+  "prefer_related_applications": false
+}

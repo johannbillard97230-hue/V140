@@ -1,0 +1,15 @@
+User-agent: *
+Allow: /
+Disallow: /cgu.html
+
+User-agent: Googlebot
+Allow: /
+Disallow: /cgu.html
+Crawl-delay: 1
+
+User-agent: Bingbot
+Allow: /
+Disallow: /cgu.html
+Crawl-delay: 1
+
+Sitemap: https://www.freedayparkingbeauvais.com/sitemap.xml

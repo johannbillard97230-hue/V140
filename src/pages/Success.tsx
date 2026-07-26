@@ -94,8 +94,11 @@ export default function SuccessPage() {
         lines.push('PRIX TOTAL : ' + bookingData.price + '€');
 
         const message = encodeURIComponent(lines.join('\n'));
-        window.open('https://wa.me/33689826515?text=' + message, '_blank');
-      }
+try {
+  window.top.location.href = 'https://wa.me/33689826515?text=' + message;
+} catch (e) {
+  window.location.href = 'https://wa.me/33689826515?text=' + message;
+}      }
     }, 3000);
 
     return () => clearTimeout(timer);

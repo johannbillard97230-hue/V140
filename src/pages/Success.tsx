@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { CheckCircle, MessageCircle } from 'lucide-react';
+import { CheckCircle, MessageCircle, ArrowRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 interface BookingData {
@@ -25,10 +25,64 @@ interface BookingData {
   newsletter: boolean;
 }
 
+function buildWhatsAppUrl(data: BookingData): string {
+  const days = data.days;
+  const basePrice = 7 + (days - 1) * 6;
+
+  const lines = [
+    'Nouvelle demande de reservation Free Day Parking Beauvais',
+    '',
+    'Paiement : Confirme',
+    '',
+    '--- CLIENT ---',
+    'Nom : ' + data.lastName,
+    'Prenom : ' + data.firstName,
+    'Email : ' + data.email,
+    'Telephone : ' + (data.phone || 'Non renseigne'),
+    'Adresse de facturation : ' + data.billingAddress + ', ' + data.billingPostalCode + ' ' + data.billingCity,
+    '',
+    '--- VEHICULE ---',
+    'Modele : ' + (data.carModel || 'Non renseigne'),
+    'Immatriculation : ' + (data.licensePlate || 'Non renseignee'),
+    'Type de parking : ' + (data.parkingType === 'indoor' ? 'Couvert' : 'Exterieur'),
+    '',
+    '--- DATES ---',
+    'Dates : ' + data.startDate + ' - ' + data.endDate,
+    'Duree : ' + days + ' jours',
+    '',
+    'Decollage a Beauvais : ' + data.startTime,
+    'Atterrissage a Beauvais : ' + data.endTime,
+    'Voyageurs : ' + data.travelers,
+    'Bagages : ' + data.bags,
+    '',
+    'Newsletter : ' + (data.newsletter ? 'Oui (-2 jours offerts)' : 'Non'),
+    '',
+    '--- DETAIL DU PRIX ---',
+    'Parking (' + days + ' jours) : ' + basePrice + '€',
+  ];
+
+  if (days < 7) {
+    lines.push('Navette aller/retour : 10€');
+  } else {
+    lines.push('Navette aller/retour : Gratuite');
+    lines.push('1 jour offert : -6€');
+  }
+
+  if (data.newsletter) {
+    lines.push('Newsletter (2 jours offerts) : -12€');
+  }
+
+  lines.push('');
+  lines.push('PRIX TOTAL : ' + data.price + '€');
+
+  const message = encodeURIComponent(lines.join('\n'));
+  return 'https://wa.me/33689826515?text=' + message;
+}
+
 export default function SuccessPage() {
   const navigate = useNavigate();
   const [data, setData] = useState<BookingData | null>(null);
-  const [whatsappOpened, setWhatsappOpened] = useState(false);
+  const [whatsappUrl, setWhatsappUrl] = useState('');
 
   useEffect(() => {
     const stored = localStorage.getItem('bookingData');
@@ -38,71 +92,19 @@ export default function SuccessPage() {
     }
     const bookingData: BookingData = JSON.parse(stored);
     setData(bookingData);
+    
+    const url = buildWhatsAppUrl(bookingData);
+    setWhatsappUrl(url);
 
-    // Open WhatsApp after 3 seconds
-    const timer = setTimeout(() => {
-      if (!whatsappOpened) {
-        setWhatsappOpened(true);
+    // REDIRECTION IMMEDIATE vers WhatsApp
+    window.location.href = url;
+  }, [navigate]);
 
-        const days = bookingData.days;
-        const basePrice = 7 + (days - 1) * 6;
-
-        const lines = [
-          'Nouvelle demande de réservation Free Day Parking Beauvais',
-          '',
-          '✅ Paiement : Confirmé',
-          '',
-          '--- CLIENT ---',
-          'Nom : ' + bookingData.lastName,
-          'Prénom : ' + bookingData.firstName,
-          'Email : ' + bookingData.email,
-          'Téléphone : ' + (bookingData.phone || 'Non renseigné'),
-          'Adresse de facturation : ' + bookingData.billingAddress + ', ' + bookingData.billingPostalCode + ' ' + bookingData.billingCity,
-          '',
-          '--- VÉHICULE ---',
-          'Modèle : ' + (bookingData.carModel || 'Non renseigné'),
-          'Immatriculation : ' + (bookingData.licensePlate || 'Non renseignée'),
-          'Type de parking : ' + (bookingData.parkingType === 'indoor' ? 'Couvert' : 'Extérieur'),
-          '',
-          '--- DATES ---',
-          'Dates : ' + bookingData.startDate + ' - ' + bookingData.endDate,
-          'Durée : ' + days + ' jours',
-          '',
-          'Décollage à Beauvais : ' + bookingData.startTime,
-          'Atterrissage à Beauvais : ' + bookingData.endTime,
-          'Voyageurs : ' + bookingData.travelers,
-          'Bagages : ' + bookingData.bags,
-          '',
-          'Newsletter : ' + (bookingData.newsletter ? 'Oui (-2 jours offerts)' : 'Non'),
-          '',
-          '--- DÉTAIL DU PRIX ---',
-          'Parking (' + days + ' jours) : ' + basePrice + '€',
-        ];
-
-        if (days < 7) {
-          lines.push('Navette aller/retour : 10€');
-        } else {
-          lines.push('Navette aller/retour : Gratuite');
-          lines.push('1 jour offert : -6€');
-        }
-
-        if (bookingData.newsletter) {
-          lines.push('Newsletter (2 jours offerts) : -12€');
-        }
-
-        lines.push('');
-        lines.push('PRIX TOTAL : ' + bookingData.price + '€');
-
-        const message = encodeURIComponent(lines.join('\n'));
-try {
-  window.top.location.href = 'https://wa.me/33689826515?text=' + message;
-} catch (e) {
-  window.location.href = 'https://wa.me/33689826515?text=' + message;
-}      }
-    }, 3000);
-
-    return () => clearTimeout(timer);
-  }, [navigate, whatsappOpened]);
+  const handleOpenWhatsApp = () => {
+    if (whatsappUrl) {
+      window.location.href = whatsappUrl;
+    }
+  };
 
   if (!data) {
     return (
@@ -133,15 +135,15 @@ try {
         </motion.div>
 
         <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-          Merci ! Votre réservation est confirmée.
+          Merci ! Votre reservation est confirmee.
         </h1>
 
         <p className="text-lg text-gray-600 mb-2">
-          Votre paiement de <strong className="text-green-600">{data.price} €</strong> a été reçu.
+          Votre paiement de <strong className="text-green-600">{data.price} €</strong> a ete recu.
         </p>
 
         <div className="bg-white rounded-2xl shadow-lg p-6 mb-8 text-left mt-6">
-          <h2 className="text-lg font-semibold text-gray-900 mb-4">Récapitulatif</h2>
+          <h2 className="text-lg font-semibold text-gray-900 mb-4">Recapitulatif</h2>
           <div className="space-y-2 text-sm">
             <div className="flex justify-between">
               <span className="text-gray-500">Client</span>
@@ -152,11 +154,11 @@ try {
               <span className="font-medium">{data.startDate} - {data.endDate}</span>
             </div>
             <div className="flex justify-between">
-              <span className="text-gray-500">Durée</span>
+              <span className="text-gray-500">Duree</span>
               <span className="font-medium">{data.days} jours</span>
             </div>
             <div className="border-t pt-2 mt-2 flex justify-between">
-              <span className="text-gray-900 font-semibold">Montant payé</span>
+              <span className="text-gray-900 font-semibold">Montant paye</span>
               <span className="text-green-600 font-bold">{data.price} €</span>
             </div>
           </div>
@@ -165,29 +167,31 @@ try {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 1 }}
+          transition={{ delay: 0.5 }}
           className="space-y-4"
         >
-          <div className="flex items-center justify-center gap-2 text-gray-500">
-            <MessageCircle className="w-5 h-5" />
-            <p>Une conversation WhatsApp va s'ouvrir pour finaliser votre réservation.</p>
-          </div>
+          <p className="text-gray-500 text-sm">
+            Vous allez etre redirige vers WhatsApp...
+          </p>
 
-          {!whatsappOpened && (
-            <div className="w-8 h-8 border-4 border-gray-200 border-t-green-500 rounded-full animate-spin mx-auto" />
-          )}
-
-          {whatsappOpened && (
-            <p className="text-green-600 text-sm font-medium">
-              WhatsApp ouvert !
-            </p>
-          )}
+          {/* BOUTON DE SECOURS si la redirection automatique est bloquee */}
+          <motion.button
+            initial={{ scale: 0.9 }}
+            animate={{ scale: 1 }}
+            transition={{ delay: 0.3, type: 'spring' }}
+            onClick={handleOpenWhatsApp}
+            className="w-full bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white font-bold py-4 px-6 rounded-xl shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-3 text-lg"
+          >
+            <MessageCircle className="w-6 h-6" />
+            Ouvrir WhatsApp
+            <ArrowRight className="w-5 h-5" />
+          </motion.button>
 
           <button
             onClick={() => navigate('/')}
-            className="mt-6 text-gray-500 hover:text-gray-700 text-sm underline"
+            className="mt-4 text-gray-500 hover:text-gray-700 text-sm underline"
           >
-            Retour à l'accueil
+            Retour a l'accueil
           </button>
         </motion.div>
       </motion.div>

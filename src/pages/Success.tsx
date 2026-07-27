@@ -81,15 +81,12 @@ export default function SuccessPage() {
   const [alreadyProcessed, setAlreadyProcessed] = useState(false);
 
   useEffect(() => {
-    // Nettoyer l'ancien flag s'il existe (transition localStorage -> sessionStorage)
-    localStorage.removeItem('paymentProcessed');
+    // Verifier si on vient de Mollie (premiere visite)
+    const urlParams = new URLSearchParams(window.location.search);
+    const isFromMollie = urlParams.get('from') === 'mollie';
 
-    // Utiliser sessionStorage (nettoye automatiquement quand on ferme l'onglet)
-    const processed = sessionStorage.getItem('paymentProcessed');
-    if (processed === 'true') {
-      // Client revient avec "page precedente" — on a encore l'URL dans sessionStorage
-      const savedUrl = sessionStorage.getItem('whatsappUrl') || '';
-      setWhatsappUrl(savedUrl);
+    if (!isFromMollie) {
+      // Client revient avec "page precedente" ou refresh
       setAlreadyProcessed(true);
       return;
     }
@@ -106,10 +103,6 @@ export default function SuccessPage() {
     const url = buildWhatsAppUrl(bookingData);
     setWhatsappUrl(url);
 
-    // Marquer comme traite ET sauvegarder l'URL pour le cas "page precedente"
-    sessionStorage.setItem('paymentProcessed', 'true');
-    sessionStorage.setItem('whatsappUrl', url);
-
     // Supprimer les donnees pour eviter la re-utilisation
     localStorage.removeItem('bookingData');
 
@@ -124,10 +117,8 @@ export default function SuccessPage() {
   };
 
   const handleBackHome = () => {
-    sessionStorage.removeItem('paymentProcessed');
-    sessionStorage.removeItem('whatsappUrl');
     navigate('/');
-  };
+n  };
 
   // Page quand le client revient avec "page precedente"
   if (alreadyProcessed) {

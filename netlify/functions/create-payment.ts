@@ -57,7 +57,7 @@ export const handler: Handler = async (event) => {
     }
 
     // === BUILD URLS ===
-    const redirectUrl = `${SITE_URL}/success`;
+const redirectUrl = `${SITE_URL}/success?from=mollie`;
     console.log("redirectUrl:", redirectUrl);
 
     if (!redirectUrl.startsWith("https://")) {

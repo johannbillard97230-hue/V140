@@ -62,6 +62,7 @@ export default function PaymentPage() {
             firstName: data.firstName,
             lastName: data.lastName,
             email: data.email,
+            phone: data.phone,
             startDate: data.startDate,
             endDate: data.endDate,
             days: data.days,

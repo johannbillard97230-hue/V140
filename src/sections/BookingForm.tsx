@@ -67,6 +67,7 @@ export function BookingForm() {
     if (!formData.firstName.trim()) newErrors.firstName = 'Le prénom est obligatoire';
     if (!formData.email.trim()) {
       newErrors.email = 'L\'email est obligatoire';
+    if (!formData.phone.trim()) newErrors.phone = 'Le numéro de téléphone est obligatoire';
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
       newErrors.email = 'L\'email n\'est pas valide';
     }
@@ -340,6 +341,21 @@ export function BookingForm() {
               </div>
               {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email}</p>}
             </div>
+
+{/* Téléphone */}
+<div>
+  <Label className="text-gray-700 mb-2 block">
+    Téléphone <span className="text-red-500">*</span>
+  </Label>
+  <Input
+    type="tel"
+    placeholder="06 12 34 56 78"
+    value={formData.phone}
+    onChange={(e) => updateFormData('phone', e.target.value)}
+    className={errors.phone ? 'border-red-500 focus-visible:ring-red-500' : ''}
+  />
+  {errors.phone && <p className="text-red-500 text-xs mt-1">{errors.phone}</p>}
+</div>
 
             {/* Adresse de facturation */}
             <div className="pt-2">

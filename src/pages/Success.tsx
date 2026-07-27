@@ -83,20 +83,33 @@ export default function SuccessPage() {
   const navigate = useNavigate();
   const [data, setData] = useState<BookingData | null>(null);
   const [whatsappUrl, setWhatsappUrl] = useState('');
+  const [alreadyProcessed, setAlreadyProcessed] = useState(false);
 
   useEffect(() => {
-    const stored = localStorage.getItem('bookingData');
-    if (!stored) {
-      navigate('/');
+    const processed = localStorage.getItem('paymentProcessed');
+    if (processed === 'true') {
+      setAlreadyProcessed(true);
+      localStorage.removeItem('paymentProcessed');
       return;
     }
+
+    const stored = localStorage.getItem('bookingData');
+    if (!stored) {
+      setAlreadyProcessed(true);
+      return;
+    }
+
     const bookingData: BookingData = JSON.parse(stored);
     setData(bookingData);
-    
+
     const url = buildWhatsAppUrl(bookingData);
     setWhatsappUrl(url);
 
-    // REDIRECTION IMMEDIATE vers WhatsApp
+    // SUPPRESSION immediate des donnees pour eviter la double redirection
+    localStorage.setItem('paymentProcessed', 'true');
+    localStorage.removeItem('bookingData');
+
+    // Redirection immediate vers WhatsApp
     window.location.href = url;
   }, [navigate]);
 
@@ -105,6 +118,49 @@ export default function SuccessPage() {
       window.location.href = whatsappUrl;
     }
   };
+
+  const handleBackHome = () => {
+    localStorage.removeItem('paymentProcessed');
+    navigate('/');
+  };
+
+  // Si le client revient avec "page precedente" : message simple
+  if (alreadyProcessed) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-green-50 to-white p-4">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="text-center max-w-lg w-full"
+        >
+          <motion.div
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            transition={{ delay: 0.2, type: 'spring', stiffness: 200 }}
+            className="w-24 h-24 rounded-full bg-green-100 flex items-center justify-center mx-auto mb-6"
+          >
+            <CheckCircle className="w-14 h-14 text-green-600" />
+          </motion.div>
+
+          <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+            Merci ! Votre reservation est confirmee.
+          </h1>
+
+          <p className="text-lg text-gray-600 mb-8">
+            Votre paiement a ete recu. Une conversation WhatsApp a ete ouverte avec le loueur.
+          </p>
+
+          <button
+            onClick={handleBackHome}
+            className="bg-gray-900 hover:bg-gray-800 text-white font-bold py-3 px-6 rounded-xl transition-colors"
+          >
+            Retour a l'accueil
+          </button>
+        </motion.div>
+      </div>
+    );
+  }
 
   if (!data) {
     return (
@@ -174,7 +230,6 @@ export default function SuccessPage() {
             Vous allez etre redirige vers WhatsApp...
           </p>
 
-          {/* BOUTON DE SECOURS si la redirection automatique est bloquee */}
           <motion.button
             initial={{ scale: 0.9 }}
             animate={{ scale: 1 }}
@@ -188,7 +243,7 @@ export default function SuccessPage() {
           </motion.button>
 
           <button
-            onClick={() => navigate('/')}
+            onClick={handleBackHome}
             className="mt-4 text-gray-500 hover:text-gray-700 text-sm underline"
           >
             Retour a l'accueil

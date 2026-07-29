@@ -1,5 +1,5 @@
 // Availability ranges for the booking calendar and marquee
-// All dates use JavaScript Date (month is 0-indexed: 0=January, 5=June, 6=July)
+// All dates use JavaScript Date (month is 0-indexed: 0=January, 5=June)
 
 export const juneAllowedRanges = [
   { from: new Date(2026, 5, 4), to: new Date(2026, 5, 7) },
@@ -23,7 +23,7 @@ export const augustAllowedRanges = [
   { from: new Date(2026, 7, 28), to: new Date(2026, 7, 31) },
 ];
 
-// September 2026 availability: 1, 6-24, 30 (blocks 2-5 and 25-29)
+// September 2026 availability: 1, 6-29, 30 (blocks 2-5 and 25-29)
 export const septemberAllowedRanges = [
   { from: new Date(2026, 8, 1), to: new Date(2026, 8, 1) },
   { from: new Date(2026, 8, 6), to: new Date(2026, 8, 29) },
@@ -67,7 +67,14 @@ export function isDateAllowed(date: Date): boolean {
     return septemberAllowedRanges.some((range) => date >= range.from && date <= range.to);
   }
 
-  // October 2026 and beyond: all dates open
+  // October 2026: block 12, 13, 14
+  if (date.getFullYear() === 2026 && date.getMonth() === 9) {
+    const day = date.getDate();
+    if (day === 12 || day === 13 || day === 14) return false;
+    return true;
+  }
+
+  // November 2026 and beyond: all dates open
   return true;
 }
 

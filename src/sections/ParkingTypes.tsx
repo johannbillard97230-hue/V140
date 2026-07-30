@@ -8,7 +8,7 @@ const parkingOptions = [
     image: '/parking-exterieur-aeroport-beauvais.jpg',
     alt: 'Parking extérieur sécurisé Free Day Parking Beauvais près de l\'aéroport Beauvais-Tillé avec places stabilisées et clôture',
     icon: Sun,
-    address: '4 Rue Pierre Chapeaux, 60000 Beauvais',
+    address: '4 Rue Pierre Chardeaux, 60000 Beauvais',
     description:
       'Notre parking extérieur stabilisé et clairement délimité vous offre une solution économique pour garer votre véhicule en toute sécurité. Fini les places sur la pelouse et les chaussures pleines de bouon.',
     features: [

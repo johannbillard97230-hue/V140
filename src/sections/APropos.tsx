@@ -72,7 +72,7 @@ export function APropos() {
               Né de l'envie de se dépasser personnellement et de ne plus vendre sa force vitale pour réaliser le rêve d'un autre, FreeDayParkingBeauvais s'est donnée pour mission de transformer l'expérience de stationnement aéroportuaire. Notre entreprise se consacre à offrir à chaque voyageur un service fiable, transparent et à taille humaine.
             </p>
             <p>
-              Depuis nos débuts, nous avons déjà accueilli des centaines de voyageurs, cumulé <strong className="text-gray-900">85 avis 5 étoiles sur 88 sur Google</strong>, et fait la preuve qu'un parking aéroport peut être à la fois économique et de qualité.
+              Depuis nos débuts, nous avons déjà accueilli des centaines de voyageurs, cumulé <strong className="text-gray-900">86 avis 5 étoiles sur 89 sur Google</strong>, et fait la preuve qu'un parking aéroport peut être à la fois économique et de qualité.
             </p>
           </div>
         </motion.div>
@@ -194,7 +194,7 @@ export function APropos() {
         >
           {[
             { value: 'Mars 2025', label: 'Date de création' },
-            { value: '78', label: 'avis 5 étoiles Google' },
+            { value: '86', label: 'avis 5 étoiles Google' },
             { value: '70%', label: "d'économies vs officiel" },
             { value: '12 min', label: 'de navette aéroport' },
           ].map((stat, index) => (

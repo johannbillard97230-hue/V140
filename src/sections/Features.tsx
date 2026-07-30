@@ -53,7 +53,7 @@ const features = [
 ];
 
 const stats = [
-  { icon: Star, value: '85', label: 'avis 5 étoiles sur 88' },
+  { icon: Star, value: '86', label: 'avis 5 étoiles sur 89' },
   { icon: Users, value: '50+', label: 'personnes nous recommandent' },
   { icon: CheckCircle, value: '70%', label: "d'économies" },
   { icon: Clock, value: '12', suffix: 'min', label: 'de navette' },

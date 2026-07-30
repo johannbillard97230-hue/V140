@@ -1,6 +1,6 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
-import { Shield, Sun, Umbrella, CheckCircle } from 'lucide-react';
+import { Shield, Sun, Umbrella, CheckCircle, MapPin } from 'lucide-react';
 
 const parkingOptions = [
   {
@@ -8,6 +8,7 @@ const parkingOptions = [
     image: '/parking-exterieur-aeroport-beauvais.jpg',
     alt: 'Parking extérieur sécurisé Free Day Parking Beauvais près de l\'aéroport Beauvais-Tillé avec places stabilisées et clôture',
     icon: Sun,
+    address: '4 Rue Pierre Chapeaux, 60000 Beauvais',
     description:
       'Notre parking extérieur stabilisé et clairement délimité vous offre une solution économique pour garer votre véhicule en toute sécurité. Fini les places sur la pelouse et les chaussures pleines de bouon.',
     features: [
@@ -23,6 +24,7 @@ const parkingOptions = [
     image: '/parking-couvert-aeroport-beauvais.jpg',
     alt: 'Parking couvert intérieur Free Day Parking Beauvais à l\'abri des intempéries près de l\'aéroport Beauvais-Tillé BVA',
     icon: Umbrella,
+    address: '8 Rue Maurice Segonds, 60000 Beauvais',
     description:
       'Notre parking couvert protège votre véhicule des intempéries, de la grêle et des UV. Idéal pour les séjours longue durée, votre voiture reste impeccable à votre retour.',
     features: [
@@ -124,6 +126,11 @@ export function ParkingTypes() {
                     <option.icon className="w-6 h-6 text-white" />
                   </div>
                   <h3 className="text-2xl font-bold text-gray-900">{option.title}</h3>
+                </div>
+
+                <div className="flex items-start gap-2 mb-4">
+                  <MapPin className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
+                  <span className="text-gray-700 font-medium">{option.address}</span>
                 </div>
 
                 <p className="text-gray-600 leading-relaxed mb-6">{option.description}</p>

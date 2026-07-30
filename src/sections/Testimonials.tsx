@@ -10,7 +10,7 @@ const testimonials: Testimonial[] = [
     id: 1,
     name: 'Hichem Yacoubi',
     rating: 5,
-    comment: 'Super merci beaucoup, loueur sympathiques et à l\'écoute de nos demandes je conseille les yeux fermés. Service impeccable et navette très pratique !',
+    comment: 'Super merci beaucoup, loueur sympathiques et à l'écoute de nos demandes je conseille les yeux fermés. Service impeccable et navette très pratique !',
     date: 'Il y a 2 semaines',
   },
   {
@@ -24,7 +24,7 @@ const testimonials: Testimonial[] = [
     id: 3,
     name: 'Anthony D.',
     rating: 5,
-    comment: 'Tout c\'est très bien passé et superbe communication avec le loueur. Parking sécurisé et bien organisé. Je reviendrai sans hésiter.',
+    comment: 'Tout c'est très bien passé et superbe communication avec le loueur. Parking sécurisé et bien organisé. Je reviendrai sans hésiter.',
     date: 'Il y a 3 semaines',
   },
   {
@@ -152,7 +152,7 @@ export function Testimonials() {
               </div>
               <span className="text-gray-700 font-bold">5/5</span>
               <span className="text-gray-500">|</span>
-              <span className="text-gray-700 font-medium">85 avis 5 étoiles sur 88 avis Google</span>
+              <span className="text-gray-700 font-medium">86 avis 5 étoiles sur 89 avis Google</span>
             </a>
           </div>
 
@@ -219,28 +219,42 @@ export function Testimonials() {
                 transition={{ duration: 0.4, ease: 'easeInOut' }}
                 className="absolute inset-0"
               >
-                <div className="h-full bg-white rounded-3xl shadow-xl border border-gray-100 p-8 sm:p-12">
-                  <div className="absolute top-6 right-6 w-16 h-16 rounded-full bg-gradient-to-br from-purple-100 to-blue-100 flex items-center justify-center">
-                    <Quote className="w-8 h-8 text-purple-600" />
-                  </div>
-
-                  <div className="flex gap-1 mb-6">
-                    {[...Array(testimonials[currentIndex].rating)].map((_, i) => (
-                      <Star key={i} className="w-6 h-6 text-yellow-400 fill-yellow-400" />
-                    ))}
-                  </div>
-
-                  <p className="text-xl sm:text-2xl text-gray-700 leading-relaxed mb-8">
-                    "{testimonials[currentIndex].comment}"
+                <div className="bg-white rounded-3xl shadow-xl border border-gray-100 p-8 sm:p-12 h-full flex flex-col justify-center">
+                  <Quote className="w-12 h-12 text-green-200 mb-6" />
+                  <p className="text-xl sm:text-2xl text-gray-800 leading-relaxed mb-8">
+                    {testimonials[currentIndex].comment}
                   </p>
-
-                  <div className="flex items-center gap-4">
-                    <div className="w-14 h-14 rounded-full bg-gradient-to-br from-purple-500 to-blue-500 flex items-center justify-center text-white text-xl font-bold">
-                      {testimonials[currentIndex].name.charAt(0)}
-                    </div>
+                  <div className="flex items-center justify-between mt-auto">
                     <div>
-                      <p className="font-bold text-gray-900">{testimonials[currentIndex].name}</p>
-                      <p className="text-sm text-gray-500">{testimonials[currentIndex].date}</p>
+                      <p className="font-bold text-gray-900 text-lg">
+                        {testimonials[currentIndex].name}
+                      </p>
+                      <div className="flex items-center gap-1 mt-1">
+                        {[...Array(testimonials[currentIndex].rating)].map((_, i) => (
+                          <Star key={i} className="w-4 h-4 text-yellow-400 fill-yellow-400" />
+                        ))}
+                        <span className="text-sm text-gray-500 ml-2">
+                          {testimonials[currentIndex].date}
+                        </span>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Button
+                        variant="outline"
+                        size="icon"
+                        onClick={prevSlide}
+                        className="rounded-full hover:bg-green-50 hover:border-green-200"
+                      >
+                        <ChevronLeft className="w-5 h-5" />
+                      </Button>
+                      <Button
+                        variant="outline"
+                        size="icon"
+                        onClick={nextSlide}
+                        className="rounded-full hover:bg-green-50 hover:border-green-200"
+                      >
+                        <ChevronRight className="w-5 h-5" />
+                      </Button>
                     </div>
                   </div>
                 </div>
@@ -248,41 +262,22 @@ export function Testimonials() {
             </AnimatePresence>
           </div>
 
-          <div className="flex items-center justify-center gap-4 mt-8">
-            <Button
-              variant="outline"
-              size="icon"
-              onClick={prevSlide}
-              className="rounded-full w-12 h-12 border-gray-200 hover:bg-gray-100"
-            >
-              <ChevronLeft className="w-5 h-5" />
-            </Button>
-
-            <div className="flex gap-2">
-              {testimonials.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => {
-                    setDirection(index > currentIndex ? 1 : -1);
-                    setCurrentIndex(index);
-                  }}
-                  className={`w-3 h-3 rounded-full transition-all ${
-                    index === currentIndex
-                      ? 'w-8 bg-gradient-to-r from-purple-600 to-blue-600'
-                      : 'bg-gray-300 hover:bg-gray-400'
-                  }`}
-                />
-              ))}
-            </div>
-
-            <Button
-              variant="outline"
-              size="icon"
-              onClick={nextSlide}
-              className="rounded-full w-12 h-12 border-gray-200 hover:bg-gray-100"
-            >
-              <ChevronRight className="w-5 h-5" />
-            </Button>
+          {/* Dots indicator */}
+          <div className="flex justify-center gap-2 mt-6">
+            {testimonials.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => {
+                  setDirection(index > currentIndex ? 1 : -1);
+                  setCurrentIndex(index);
+                }}
+                className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                  index === currentIndex
+                    ? 'w-8 bg-green-500'
+                    : 'bg-gray-300 hover:bg-gray-400'
+                }`}
+              />
+            ))}
           </div>
         </motion.div>
       </div>

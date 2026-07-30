@@ -15,11 +15,11 @@ export const julyAllowedRanges = [
   { from: new Date(2026, 6, 31), to: new Date(2026, 6, 31) },
 ];
 
-// August 2026 availability: 1-3, 5, 7-13, 28-31
+// August 2026 availability: 1-3, 5, 11-13, 28-31 (blocks 7-10)
 export const augustAllowedRanges = [
   { from: new Date(2026, 7, 1), to: new Date(2026, 7, 3) },
   { from: new Date(2026, 7, 5), to: new Date(2026, 7, 5) },
-  { from: new Date(2026, 7, 7), to: new Date(2026, 7, 13) },
+  { from: new Date(2026, 7, 11), to: new Date(2026, 7, 13) },
   { from: new Date(2026, 7, 28), to: new Date(2026, 7, 31) },
 ];
 

@@ -32,7 +32,7 @@ function buildWhatsAppUrl(data: BookingData): string {
   const lines = [
     'Nouvelle demande de reservation Free Day Parking Beauvais',
     '',
-    'Paiement : Confirme',
+    'Paiement : Confirmé',
     '',
     '--- CLIENT ---',
     'Nom : ' + data.lastName,

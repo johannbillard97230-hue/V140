@@ -39,7 +39,7 @@ const faqItems: FAQItem[] = [
   {
     id: 6,
     question: 'Quels sont les horaires de la navette ?',
-    answer: 'Notre navette 100% électrique est disponible 24h/24, 7 jours sur 7, y compris les jours fériés. Quel que soit votre créneau de vol, nous assurons votre transfert vers et depuis l\'aéroport de Beauvais-Tillé à toute heure du jour et de la nuit.',
+    answer: 'Notre navette 100% électrique est disponible 24h/24, 7 jours sur 7, y compris les jours fériés. Nous assurons le premier transfert à partir de 4h du matin. Quel que soit votre créneau de vol, nous assurons votre transfert vers et depuis l\'aéroport de Beauvais-Tillé à toute heure du jour et de la nuit.',
   },
   {
     id: 7,

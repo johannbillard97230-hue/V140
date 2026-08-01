@@ -36,28 +36,23 @@ function buildWhatsAppUrl(data: BookingData): string {
     '',
     '--- CLIENT ---',
     'Nom : ' + data.lastName,
-    'Prenom : ' + data.firstName,
+    'Prénom : ' + data.firstName,
     'Email : ' + data.email,
-    'Telephone : ' + (data.phone || 'Non renseigne'),
+    'Téléphone : ' + (data.phone || 'Non renseigné'),
     'Adresse de facturation : ' + data.billingAddress + ', ' + data.billingPostalCode + ' ' + data.billingCity,
-    '',
-    '--- VEHICULE ---',
-    'Modele : ' + (data.carModel || 'Non renseigne'),
-    'Immatriculation : ' + (data.licensePlate || 'Non renseignee'),
-    'Type de parking : ' + (data.parkingType === 'indoor' ? 'Couvert' : 'Exterieur'),
     '',
     '--- DATES ---',
     'Dates : ' + data.startDate + ' - ' + data.endDate,
-    'Duree : ' + days + ' jours',
+    'Durée : ' + days + ' jours',
     '',
-    'Decollage a Beauvais : ' + data.startTime,
-    'Atterrissage a Beauvais : ' + data.endTime,
+    'Décollage à Beauvais : ' + data.startTime,
+    'Atterrissage à Beauvais : ' + data.endTime,
     'Voyageurs : ' + data.travelers,
     'Bagages : ' + data.bags,
     '',
     'Newsletter : ' + (data.newsletter ? 'Oui (-2 jours offerts)' : 'Non'),
     '',
-    '--- DETAIL DU PRIX ---',
+    '--- DÉTAIL DU PRIX ---',
     'Parking (' + days + ' jours) : ' + basePrice + '€',
   ];
 
@@ -97,7 +92,7 @@ export default function SuccessPage() {
     const url = buildWhatsAppUrl(bookingData);
     setWhatsappUrl(url);
 
-    // Supprimer les donnees
+    // Supprimer les données
     localStorage.removeItem('bookingData');
 
     // REDIRECTION SANS AJOUTER DANS L'HISTORIQUE (replace au lieu de href)

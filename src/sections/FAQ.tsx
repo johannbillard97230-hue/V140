@@ -14,7 +14,7 @@ const faqItems: FAQItem[] = [
   {
     id: 1,
     question: 'Comment fonctionne la navette électrique ?',
-    answer: 'Notre navette 100% électrique vous dépose directement au dépose minute de l\'aéroport de Beauvais en seulement 12 minutes. Elle est incluse gratuitement dans votre réservation de 7 jours ou plus. Notre navette est disponible 24h/24, 7j/7, y compris les jours fériés.',
+    answer: 'Notre navette 100% électrique vous dépose directement au dépose minute de l'aéroport de Beauvais en seulement 12 minutes. Elle est incluse gratuitement dans votre réservation de 7 jours ou plus. Notre navette est disponible 24h/24, 7j/7, y compris les jours fériés.',
   },
   {
     id: 2,
@@ -24,22 +24,22 @@ const faqItems: FAQItem[] = [
   {
     id: 3,
     question: 'Le parking est-il sécurisé ?',
-    answer: 'Absolument ! Notre parking est entièrement clos et sécurisé avec un portail électrique, une porte sectionnelle pour l\'accès intérieur, et un système de vidéosurveillance. De plus, sur simple demande, nous pouvons vous envoyer des photos de votre véhicule pendant votre absence pour vous garantir une tranquillité totale.',
+    answer: 'Absolument ! Notre parking est entièrement clos et sécurisé avec un portail électrique, une porte sectionnelle pour l'accès intérieur, et un système de vidéosurveillance. De plus, sur simple demande, nous pouvons vous envoyer des photos de votre véhicule pendant votre absence pour vous garantir une tranquillité totale.',
   },
   {
     id: 4,
-    question: 'Quelle est l\'adresse exacte du parking ?',
-    answer: 'Notre parking est situé au 8 rue Maurice Segonds, 60000 Beauvais. Il est facilement accessible depuis l\'autoroute A16 (sortie Beauvais Nord). Une fois sur place, notre équipe vous accueille et vous aide à garer votre véhicule avant de vous emmener à l\'aéroport avec notre navette.',
+    question: 'Quelle est l'adresse exacte du parking ?',
+    answer: 'Notre parking est situé au 8 rue Maurice Segonds, 60000 Beauvais. Il est facilement accessible depuis l'autoroute A16 (sortie Beauvais Nord). Une fois sur place, notre équipe vous accueille et vous aide à garer votre véhicule avant de vous emmener à l'aéroport avec notre navette.',
   },
   {
     id: 5,
     question: 'Puis-je annuler ou modifier ma réservation ?',
-    answer: 'Oui, vous pouvez annuler gratuitement jusqu\'à 24 heures avant votre arrivée prévue. Pour les modifications (dates, durée, etc.), contactez-nous par téléphone ou email et nous ferons le maximum pour adapter votre réservation selon vos besoins.',
+    answer: 'Oui, vous pouvez annuler gratuitement jusqu'à 24 heures avant votre arrivée prévue. Pour les modifications (dates, durée, etc.), contactez-nous par téléphone ou email et nous ferons le maximum pour adapter votre réservation selon vos besoins.',
   },
   {
     id: 6,
     question: 'Quels sont les horaires de la navette ?',
-    answer: 'Notre navette 100% électrique est disponible 24h/24, 7 jours sur 7, y compris les jours fériés. Nous assurons le premier transfert à partir de 4h du matin. Quel que soit votre créneau de vol, nous assurons votre transfert vers et depuis l\'aéroport de Beauvais-Tillé à toute heure du jour et de la nuit.',
+    answer: 'Notre navette 100% électrique est disponible 24h/24, 7 jours sur 7, y compris les jours fériés. Nous assurons le premier transfert à partir de 4h du matin. Quel que soit votre créneau de vol, nous assurons votre transfert vers et depuis l'aéroport de Beauvais-Tillé à toute heure du jour et de la nuit.',
   },
   {
     id: 7,
@@ -49,7 +49,12 @@ const faqItems: FAQItem[] = [
   {
     id: 8,
     question: 'Comment fonctionne le service de photos ?',
-    answer: 'Sur simple demande lors de votre réservation ou au dépôt de votre véhicule, nous pouvons vous envoyer des photos de votre véhicule pendant votre absence (par email ou SMS). Ce service est gratuit et vous permet de voyager l\'esprit tranquille, en toute confiance.',
+    answer: 'Sur simple demande lors de votre réservation ou au dépôt de votre véhicule, nous pouvons vous envoyer des photos de votre véhicule pendant votre absence (par email ou SMS). Ce service est gratuit et vous permet de voyager l'esprit tranquille, en toute confiance.',
+  },
+  {
+    id: 9,
+    question: 'Y a-t-il des frais supplémentaires si nous sommes plus de 3 passagers ?',
+    answer: 'Non, Free Day Parking Beauvais n'applique aucun frais supplémentaire pour les passagers au-delà de 3 personnes. Le tarif de la réservation reste donc inchangé, même si vous voyagez à 4 personnes ou plus.',
   },
 ];
 

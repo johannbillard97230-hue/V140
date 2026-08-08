@@ -185,7 +185,7 @@ export function Hero() {
                     </svg>
                   ))}
                 </div>
-                <p className="text-sm text-white/70">86 avis 5 étoiles sur 89 avis Google</p>
+                <p className="text-sm text-white/70">87 avis 5 étoiles sur 9O avis Google</p>
               </div>
             </motion.div>
           </motion.div>

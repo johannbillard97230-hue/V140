@@ -152,7 +152,7 @@ export function Testimonials() {
               </div>
               <span className="text-gray-700 font-bold">5/5</span>
               <span className="text-gray-500">|</span>
-              <span className="text-gray-700 font-medium">86 avis 5 étoiles sur 89 avis Google</span>
+              <span className="text-gray-700 font-medium">87 avis 5 étoiles sur 90 avis Google</span>
             </a>
           </div>
 

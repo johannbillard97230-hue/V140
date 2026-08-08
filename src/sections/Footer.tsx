@@ -73,7 +73,7 @@ export function Footer() {
                     <Star key={i} className="w-4 h-4 text-yellow-400 fill-yellow-400" />
                   ))}
                 </div>
-                <span className="text-sm text-gray-400">5/5 sur 86 avis Google</span>
+                <span className="text-sm text-gray-400">5/5 sur 87 avis Google</span>
               </div>
             </div>
 

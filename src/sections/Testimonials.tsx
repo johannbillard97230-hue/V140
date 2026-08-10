@@ -148,7 +148,7 @@ export function Testimonials() {
                     <Star key={i} className="w-5 h-5 text-yellow-400 fill-yellow-400" />
                   ))}
                 </div>
-                <p className="text-sm font-bold text-gray-900">5,0 / 5</p>
+                <p className="text-sm font-bold text-gray-900">4,9 / 5</p>
               </div>
             </div>
 

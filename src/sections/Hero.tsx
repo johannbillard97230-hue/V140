@@ -177,7 +177,12 @@ export function Hero() {
                   <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
                 </svg>
               </div>
-              <div>
+              <a
+                href="https://www.google.com/maps/place/FreeDayParkingBeauvais+(17+%E2%82%AC+pour+7+jours+avec+navette+aller+%2F+retour)/@49.42919,2.05781,6729m/data=!3m1!1e3!4m8!3m7!1s0x47e7011af3fc9665:0xd51e7841cd21f3fc!8m2!3d49.4213796!4d2.0739166!9m1!1b1!16s%2Fg%2F11yh0xb2gn?entry=ttu&g_ep=EgoyMDI2MDQwOC4wIKXMDSoASAFQAw%3D%3D"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group cursor-pointer"
+              >
                 <div className="flex items-center gap-1">
                   {[1, 2, 3, 4, 5].map((i) => (
                     <svg key={i} className="w-5 h-5 text-yellow-400 fill-current" viewBox="0 0 20 20">
@@ -185,8 +190,8 @@ export function Hero() {
                     </svg>
                   ))}
                 </div>
-                <p className="text-sm text-white/70">88 avis 5 étoiles sur 91 avis Google</p>
-              </div>
+                <p className="text-sm text-white/70 group-hover:text-white group-hover:underline transition-colors">88 avis 5 étoiles sur 91 avis Google</p>
+              </a>
             </motion.div>
           </motion.div>
 

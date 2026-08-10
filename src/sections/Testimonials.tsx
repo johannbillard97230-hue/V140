@@ -8,37 +8,44 @@ import type { Testimonial } from '@/types';
 const testimonials: Testimonial[] = [
   {
     id: 1,
-    name: 'Hichem Yacoubi',
+    name: 'Dumitru Breabin.',
     rating: 5,
-    comment: "Super merci beaucoup, loueur sympathiques et à l'écoute de nos demandes je conseille les yeux fermés. Service impeccable et navette très pratique !",
-    date: 'Il y a 2 semaines',
+    comment: "Très satisfait du service, je le recommande vivement !",
+    date: 'Visité en août 2026',
   },
   {
     id: 2,
-    name: 'Charles Pasqua',
+    name: 'Malorie Duchemin.',
     rating: 5,
-    comment: "Superbe expérience très réactif je recommande fortement !! Le prix est imbattable et le service est top. Navette électrique au top !",
-    date: 'Il y a 1 mois',
+    comment: "Nous avons stationné notre voiture pendant 12 jours.
+Tout c'est très bien passé.
+Nous avons été accueillis avec le sourire et attention.
+Puis conduit à l'aéroport dans la bonne humeur.🙂
+Le concept est super.
+Les prix sont moins cher que les concurrents pour un service de meilleur qualité en plus 👍
+Merci pour tout.🙏
+Nous reviendrons sans hésiter lors de notre prochain vol au départ de Beauvais.☺️",
+    date: 'Visité en août 2026',
   },
   {
     id: 3,
-    name: 'Anthony D.',
+    name: 'JAMILA BENZIANE.',
     rating: 5,
-    comment: "Tout c'est très bien passé et superbe communication avec le loueur. Parking sécurisé et bien organisé. Je reviendrai sans hésiter.",
-    date: 'Il y a 3 semaines',
+    comment: "Je recommande vivement FreeDayParking. La personne a été accueillante et professionnel. Les tarifs sont très corrects et l'emplacement très pratique. Je reviendrai sans hésiter. Merci pour votre service!",
+    date: 'Visité en juillet 2026',
   },
   {
     id: 4,
-    name: 'Marie L.',
+    name: 'Catherine L.',
     rating: 5,
-    comment: "Excellent service ! Voiture gardée un mois, aide avec les valises, transfert aller/retour parfait. Le prix est vraiment avantageux comparé aux parkings officiels.",
-    date: 'Il y a 2 mois',
+    comment: "Parfait rien à dire super sympa, ponctuel et très professionnel et en plus avec le sourire 🥰🥰🥰 …",
+    date: 'Visité en juillet 2026',
   },
   {
     id: 5,
-    name: 'Philippe R.',
+    name: 'El Persever.',
     rating: 5,
-    comment: "Première expérience et certainement pas la dernière ! Accueil chaleureux, parking propre et sécurisé. La navette électrique est un vrai plus.",
+    comment: "Parfait, de la réservation, au départ et au retour, merci Johann !.",
     date: 'Il y a 1 mois',
   },
 ];

@@ -67,10 +67,10 @@ export function BookingForm() {
     if (!formData.firstName.trim()) newErrors.firstName = 'Le prénom est obligatoire';
     if (!formData.email.trim()) {
       newErrors.email = 'L\'email est obligatoire';
-    if (!formData.phone.trim()) newErrors.phone = 'Le numéro de téléphone est obligatoire';
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
       newErrors.email = 'L\'email n\'est pas valide';
     }
+    if (!formData.phone.trim()) newErrors.phone = 'Le numéro de téléphone est obligatoire';
     if (!formData.billingAddress.trim()) newErrors.billingAddress = 'L\'adresse de facturation est obligatoire';
     if (!formData.billingPostalCode.trim()) newErrors.billingPostalCode = 'Le code postal est obligatoire';
     if (!formData.billingCity.trim()) newErrors.billingCity = 'La ville est obligatoire';

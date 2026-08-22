@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Phone } from 'lucide-react';
+import { Menu, X, Phone, Youtube } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const navItems = [
@@ -9,6 +9,10 @@ const navItems = [
   { label: 'Comparatif', href: '#comparison' },
   { label: 'Avis', href: '#testimonials' },
   { label: 'FAQ', href: '#faq' },
+];
+
+const externalLinks = [
+  { label: 'YouTube', href: 'https://www.freedayparkingbeauvais.com/youtube-location-parking-beauvais-25-euros-les-7-jours', icon: Youtube },
 ];
 
 export function Navbar() {
@@ -92,6 +96,20 @@ export function Navbar() {
                   {item.label}
                 </a>
               ))}
+              {externalLinks.map((item) => (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`text-sm font-medium transition-all duration-300 hover:opacity-80 flex items-center gap-1.5 ${
+                    isScrolled ? 'text-gray-700' : 'text-white'
+                  }`}
+                >
+                  <item.icon className="w-4 h-4" />
+                  {item.label}
+                </a>
+              ))}
             </div>
 
             {/* CTA Buttons */}
@@ -165,10 +183,25 @@ export function Navbar() {
                       {item.label}
                     </motion.a>
                   ))}
+                  {externalLinks.map((item, index) => (
+                    <motion.a
+                      key={item.href}
+                      href={item.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      initial={{ opacity: 0, x: 20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: (navItems.length + index) * 0.1 }}
+                      className="text-lg font-medium text-gray-800 hover:text-parking-blue transition-colors py-3 border-b border-gray-100 flex items-center gap-2"
+                    >
+                      <item.icon className="w-5 h-5 text-red-600" />
+                      {item.label}
+                    </motion.a>
+                  ))}
                   <motion.div
                     initial={{ opacity: 0, x: 20 }}
                     animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: navItems.length * 0.1 }}
+                    transition={{ delay: (navItems.length + externalLinks.length) * 0.1 }}
                     className="pt-4"
                   >
                     <Button

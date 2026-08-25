@@ -82,9 +82,14 @@ export function BookingForm() {
 
   const calculateDays = () => {
     if (!formData.startDate || !formData.endDate) return 0;
-    const diff = formData.endDate.getTime() - formData.startDate.getTime();
+    // Normalize dates to midnight to avoid timezone/hour drift
+    const start = new Date(formData.startDate);
+    start.setHours(0, 0, 0, 0);
+    const end = new Date(formData.endDate);
+    end.setHours(0, 0, 0, 0);
+    const diff = end.getTime() - start.getTime();
     // +1 to count inclusively (e.g., 17th to 23rd = 7 days)
-    return Math.ceil(diff / (1000 * 60 * 60 * 24)) + 1;
+    return Math.round(diff / (1000 * 60 * 60 * 24)) + 1;
   };
 
   const calculatePrice = () => {

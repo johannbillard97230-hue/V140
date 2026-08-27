@@ -24,14 +24,8 @@ export function usePricingCalculator() {
     const totalDiscountDays = discountDays + newsletterDiscountDays;
     const discountAmount = totalDiscountDays * DAILY_RATE_ADDITIONAL;
     
-    // First day is 7€, additional days are 6€
-    // Discount applies to additional days first
-    let finalPrice = basePrice + shuttleFee;
-    if (totalDiscountDays > 0) {
-      // Remove discount days from the calculation
-      const paidDays = Math.max(1, days - totalDiscountDays);
-      finalPrice = DAILY_RATE_FIRST + (paidDays - 1) * DAILY_RATE_ADDITIONAL + shuttleFee;
-    }
+    // Apply discounts as fixed amounts (align with BookingForm.tsx)
+    let finalPrice = basePrice + shuttleFee - discountAmount;
     
     // Calculate savings compared to official parking (average 78€ for 7 days)
     const officialParkingPrice = days <= 7 ? 78 : 78 + (days - 7) * 13;

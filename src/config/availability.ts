@@ -67,10 +67,10 @@ export function isDateAllowed(date: Date): boolean {
     return septemberAllowedRanges.some((range) => date >= range.from && date <= range.to);
   }
 
-  // October 2026: block 12-17
+  // October 2026: block 1, 12-17
   if (date.getFullYear() === 2026 && date.getMonth() === 9) {
     const day = date.getDate();
-    if (day >= 12 && day <= 17) return false;
+    if (day === 1 || (day >= 12 && day <= 17)) return false;
     return true;
   }
 

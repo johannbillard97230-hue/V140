@@ -67,14 +67,21 @@ export function isDateAllowed(date: Date): boolean {
     return septemberAllowedRanges.some((range) => date >= range.from && date <= range.to);
   }
 
-  // October 2026: block 1, 12-17
+  // October 2026: block 1, 12-17, 26-31
   if (date.getFullYear() === 2026 && date.getMonth() === 9) {
     const day = date.getDate();
-    if (day === 1 || (day >= 12 && day <= 17)) return false;
+    if (day === 1 || (day >= 12 && day <= 17) || day >= 26) return false;
     return true;
   }
 
-  // November 2026 and beyond: all dates open
+  // November 2026: block 1-2
+  if (date.getFullYear() === 2026 && date.getMonth() === 10) {
+    const day = date.getDate();
+    if (day >= 1 && day <= 2) return false;
+    return true;
+  }
+
+  // December 2026 and beyond: all dates open
   return true;
 }
 

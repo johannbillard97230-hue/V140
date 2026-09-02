@@ -73,7 +73,7 @@ const testimonials: TestimonialData[] = [
   },
   {
     id: 8,
-    name: 'Client Free Day Parking',
+    name: 'Tarik Raja',
     rating: 5,
     comment: "J'ai fait énormément de parkings près des aéroports, mais honnêtement, je n'ai jamais vu un service aussi incroyable que celui-ci ! Au début, je vais être honnête, je pensais que ça pouvait être une arnaque tellement les prix sont honnêtes et le fonctionnement paraît simple 😅 Mais absolument pas : c'est fiable à 100 % ! La personne qui s'occupe du service est vraiment hyper gentille, professionnelle et réactive. Tout est rapide, simple et parfaitement organisé. Franchement, c'est un 10/10. En plus, j'avais oublié mon téléphone dans la navette et la personne est venue me le rendre ! Encore un énorme merci pour ça 🙏 Les prix sont vraiment très honnêtes, le service est impeccable et l'accueil au top. Je reviendrai sans hésiter et je recommande ce parking à 100 % !",
     date: 'Septembre 2026',

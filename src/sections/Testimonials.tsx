@@ -71,6 +71,14 @@ const testimonials: TestimonialData[] = [
     date: 'Juillet 2026',
     verified: true,
   },
+  {
+    id: 8,
+    name: 'Client Free Day Parking',
+    rating: 5,
+    comment: "J'ai fait énormément de parkings près des aéroports, mais honnêtement, je n'ai jamais vu un service aussi incroyable que celui-ci ! Au début, je vais être honnête, je pensais que ça pouvait être une arnaque tellement les prix sont honnêtes et le fonctionnement paraît simple 😅 Mais absolument pas : c'est fiable à 100 % ! La personne qui s'occupe du service est vraiment hyper gentille, professionnelle et réactive. Tout est rapide, simple et parfaitement organisé. Franchement, c'est un 10/10. En plus, j'avais oublié mon téléphone dans la navette et la personne est venue me le rendre ! Encore un énorme merci pour ça 🙏 Les prix sont vraiment très honnêtes, le service est impeccable et l'accueil au top. Je reviendrai sans hésiter et je recommande ce parking à 100 % !",
+    date: 'Septembre 2026',
+    verified: true,
+  },
 ];
 
 export function Testimonials() {
@@ -155,8 +163,8 @@ export function Testimonials() {
             <div className="hidden sm:block w-px h-12 bg-gray-200" />
 
             <div className="text-center sm:text-left">
-              <p className="text-2xl font-bold text-gray-900">92 avis 5 étoiles</p>
-              <p className="text-sm text-gray-500">sur 95 avis Google</p>
+              <p className="text-2xl font-bold text-gray-900">93 avis 5 étoiles</p>
+              <p className="text-sm text-gray-500">sur 96 avis Google</p>
             </div>
 
             <div className="hidden sm:block w-px h-12 bg-gray-200" />

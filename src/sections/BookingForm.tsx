@@ -8,7 +8,8 @@ import {
   ChevronLeft,
   MapPin,
   Shield,
-  Zap
+  Zap,
+  Plane
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -42,6 +43,7 @@ export function BookingForm() {
     endDate: null,
     startTime: '06:00',
     endTime: '18:00',
+    returnFlightNumber: '',
     parkingType: 'outdoor',
     newsletter: false,
     specialRequests: '',
@@ -59,6 +61,15 @@ export function BookingForm() {
     if (errors[field]) {
       setErrors(prev => { const next = { ...prev }; delete next[field]; return next; });
     }
+  };
+
+  const validateStep1 = () => {
+    const newErrors: Record<string, string> = {};
+    if (!formData.startDate) newErrors.startDate = 'Veuillez sélectionner une date de départ';
+    if (!formData.endDate) newErrors.endDate = 'Veuillez sélectionner une date de retour';
+    if (!formData.returnFlightNumber.trim()) newErrors.returnFlightNumber = 'Le numéro de vol retour est obligatoire';
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
   };
 
   const validateStep2 = () => {
@@ -95,14 +106,14 @@ export function BookingForm() {
   const calculatePrice = () => {
     const days = calculateDays();
     if (days <= 0) return 0;
-    
+
     let price = 7 + (days - 1) * 6;
-    
+
     // Shuttle fee: 10€ for less than 7 days
     if (days < 7) {
       price += 10;
     }
-    
+
     // Apply discounts
     if (days >= 7) {
       price -= 6; // 1 day free (6€)
@@ -110,11 +121,14 @@ export function BookingForm() {
     if (formData.newsletter) {
       price -= 12; // Newsletter: -2 days (-12€) regardless of duration
     }
-    
+
     return Math.max(price, 0);
   };
 
   const nextStep = () => {
+    if (currentStep === 1 && !validateStep1()) {
+      return; // Block navigation if validation fails
+    }
     if (currentStep === 2 && !validateStep2()) {
       return; // Block navigation if validation fails
     }
@@ -148,6 +162,7 @@ export function BookingForm() {
       days,
       startTime: formData.startTime,
       endTime: formData.endTime,
+      returnFlightNumber: formData.returnFlightNumber,
       travelers: formData.travelers,
       bags: formData.bags,
       billingAddress: formData.billingAddress,
@@ -173,7 +188,7 @@ export function BookingForm() {
         const dateRange = formData.startDate 
           ? { from: formData.startDate, to: formData.endDate || undefined }
           : { from: undefined, to: undefined };
-        
+
         return (
           <div className="space-y-6">
             {/* Calendrier dans un popover */}
@@ -220,6 +235,9 @@ export function BookingForm() {
                   />
                 </PopoverContent>
               </Popover>
+              {(errors.startDate || errors.endDate) && (
+                <p className="text-red-500 text-xs mt-1">{errors.startDate || errors.endDate}</p>
+              )}
             </div>
 
             {/* Flight times */}
@@ -240,6 +258,23 @@ export function BookingForm() {
                 />
                 <p className="text-xs text-gray-500 mt-1">Heure d'arrivée à l'aéroport Beauvais</p>
               </div>
+            </div>
+
+            {/* Return Flight Number */}
+            <div>
+              <Label className="text-gray-700 mb-2 block">
+                Numéro de vol retour <span className="text-red-500">*</span>
+              </Label>
+              <div className="relative">
+                <Plane className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+                <Input
+                  placeholder="Ex: FR1234, U24321..."
+                  value={formData.returnFlightNumber}
+                  onChange={(e) => updateFormData('returnFlightNumber', e.target.value)}
+                  className={`pl-10 ${errors.returnFlightNumber ? 'border-red-500 focus-visible:ring-red-500' : ''}`}
+                />
+              </div>
+              {errors.returnFlightNumber && <p className="text-red-500 text-xs mt-1">{errors.returnFlightNumber}</p>}
             </div>
 
             {/* Travelers and Bags */}
@@ -453,6 +488,10 @@ export function BookingForm() {
                 <span className="font-medium">{formData.endTime}</span>
               </div>
               <div className="flex justify-between">
+                <span className="text-gray-600">Vol retour</span>
+                <span className="font-medium">{formData.returnFlightNumber}</span>
+              </div>
+              <div className="flex justify-between">
                 <span className="text-gray-600">Voyageurs</span>
                 <span className="font-medium">{formData.travelers}</span>
               </div>
@@ -470,7 +509,7 @@ export function BookingForm() {
                 <p className="text-sm text-gray-600">{formData.billingAddress}</p>
                 <p className="text-sm text-gray-600">{formData.billingPostalCode} {formData.billingCity}</p>
               </div>
-              
+
               {/* Détail des prix */}
               <div className="border-t border-gray-200 pt-3 space-y-2">
                 <div className="flex justify-between text-sm">
@@ -502,7 +541,7 @@ export function BookingForm() {
                   </div>
                 )}
               </div>
-              
+
               <div className="border-t pt-3">
                 <div className="flex justify-between items-center">
                   <span className="text-lg font-bold">Prix total</span>
@@ -633,7 +672,7 @@ export function BookingForm() {
                 <ChevronLeft className="w-4 h-4 mr-2" />
                 Retour
               </Button>
-              
+
               {currentStep < steps.length ? (
                 <Button
                   onClick={nextStep}

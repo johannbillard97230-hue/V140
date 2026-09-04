@@ -13,6 +13,7 @@ interface BookingData {
   days: number;
   startTime: string;
   endTime: string;
+  returnFlightNumber: string;
   travelers: number;
   bags: number;
   licensePlate: string;
@@ -47,6 +48,7 @@ function buildWhatsAppUrl(data: BookingData): string {
     '',
     'Décollage à Beauvais : ' + data.startTime,
     'Atterrissage à Beauvais : ' + data.endTime,
+    'Numéro de vol retour : ' + data.returnFlightNumber,
     'Voyageurs : ' + data.travelers,
     'Bagages : ' + data.bags,
     '',

@@ -46,6 +46,7 @@ export interface BookingFormData {
   endDate: Date | null;
   startTime: string;
   endTime: string;
+  returnFlightNumber: string;
   parkingType: 'indoor' | 'outdoor';
   newsletter: boolean;
   specialRequests?: string;

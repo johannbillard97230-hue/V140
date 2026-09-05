@@ -1,6 +1,6 @@
 import { motion, useInView } from 'framer-motion';
-import { useRef } from 'react';
-import { Star, Quote, ExternalLink } from 'lucide-react';
+import { useRef, useState } from 'react';
+import { Star, Quote, ExternalLink, ChevronDown, ChevronUp } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const googleMapsUrl = "https://www.google.com/maps/place/FreeDayParkingBeauvais+(17+%E2%82%AC+pour+7+jours+avec+navette+aller+%2F+retour)/@49.42919,2.05781,6729m/data=!3m1!1e3!4m8!3m7!1s0x47e7011af3fc9665:0xd51e7841cd21f3fc!8m2!3d49.4213796!4d2.0739166!9m1!1b1!16s%2Fg%2F11yh0xb2gn?entry=ttu&g_ep=EgoyMDI2MDQwOC4wIKXMDSoASAFQAw%3D%3D";
@@ -65,10 +65,10 @@ const testimonials: TestimonialData[] = [
   },
   {
     id: 7,
-    name: 'Aymerick Ayasse',
+    name: 'Justine Ameye',
     rating: 5,
-    comment: "Très bien !!",
-    date: 'Juillet 2026',
+    comment: "Excellente expérience avec Freeday Parking ! Le gérant est très accueillant, ponctuel et professionnel. La prise en charge à l'aller comme au retour s'est déroulée rapidement, sans aucune attente. Le parking est sécurisé et le service de navette est très pratique. Tout a été simple et efficace, ce qui permet de partir en voyage l'esprit tranquille. Je recommande sans hésiter et je referai appel à leurs services lors de mon prochain départ.",
+    date: 'Juin 2026',
     verified: true,
   },
   {
@@ -79,7 +79,132 @@ const testimonials: TestimonialData[] = [
     date: 'Septembre 2026',
     verified: true,
   },
+  {
+    id: 9,
+    name: 'Paméla Th',
+    rating: 5,
+    comment: "Un service irréprochable et humain ! J'ai laissé ma voiture dans ce parking privé et l'expérience a été parfaite du début à la fin. L'accueil est chaleureux et d'une fiabilité totale. Le service de navette est au top et sait s'adapter aux retards de Ryanair. En plus de cette tranquillité d'esprit, le prix est ultra compétitif. Je me suis même dit que Google devrait rajouter des étoiles rien que pour eux, tellement ils le méritent !",
+    date: 'Juin 2026',
+    verified: true,
+  },
 ];
+
+// Component for individual testimonial card with expand/collapse
+function TestimonialCard({ testimonial, index, isVisible }: { testimonial: TestimonialData; index: number; isVisible: boolean }) {
+  const [isExpanded, setIsExpanded] = useState(false);
+  const [needsExpand, setNeedsExpand] = useState(false);
+  const textRef = useRef<HTMLParagraphElement>(null);
+
+  // After mount, check if text exceeds 3 lines
+  useState(() => {
+    const checkHeight = () => {
+      if (textRef.current) {
+        const lineHeight = parseInt(getComputedStyle(textRef.current).lineHeight) || 24;
+        const maxHeight = lineHeight * 3;
+        setNeedsExpand(textRef.current.scrollHeight > maxHeight + 2);
+      }
+    };
+    // Small delay to ensure render
+    setTimeout(checkHeight, 100);
+  });
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 50 }}
+      animate={isVisible ? { opacity: 1, y: 0 } : {}}
+      transition={{
+        duration: 0.6,
+        delay: 0.4 + index * 0.08,
+        ease: [0.25, 0.1, 0.25, 1],
+      }}
+      className="h-full"
+    >
+      <div className="group relative bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 p-6 h-full flex flex-col">
+        {/* Quote icon */}
+        <Quote className="w-8 h-8 text-green-200 mb-4 group-hover:text-green-300 transition-colors" />
+
+        {/* Stars */}
+        <div className="flex items-center gap-0.5 mb-3">
+          {[...Array(testimonial.rating)].map((_, i) => (
+            <Star key={i} className="w-4 h-4 text-yellow-400 fill-yellow-400" />
+          ))}
+          <span className="ml-2 text-xs font-medium text-gray-400">Google</span>
+        </div>
+
+        {/* Comment with expand/collapse */}
+        <div className="relative flex-grow">
+          <div
+            className={`overflow-hidden transition-all duration-500 ease-in-out ${
+              isExpanded ? 'max-h-[2000px]' : 'max-h-[4.8em]'
+            }`}
+          >
+            <p
+              ref={textRef}
+              className="text-gray-700 leading-relaxed text-[15px]"
+            >
+              {testimonial.comment}
+            </p>
+          </div>
+
+          {/* Fade gradient when collapsed and text is long */}
+          {!isExpanded && needsExpand && (
+            <div className="absolute bottom-0 left-0 right-0 h-10 bg-gradient-to-t from-white via-white/80 to-transparent pointer-events-none" />
+          )}
+
+          {/* Read more / Read less button — only show if text is long */}
+          {needsExpand && (
+            <button
+              onClick={() => setIsExpanded(!isExpanded)}
+              className="mt-2 text-sm font-medium text-green-600 hover:text-green-700 flex items-center gap-1 transition-colors group/btn"
+            >
+              {isExpanded ? (
+                <>
+                  Réduire
+                  <ChevronUp className="w-3.5 h-3.5 transition-transform group-hover/btn:-translate-y-0.5" />
+                </>
+              ) : (
+                <>
+                  Lire la suite
+                  <ChevronDown className="w-3.5 h-3.5 transition-transform group-hover/btn:translate-y-0.5" />
+                </>
+              )}
+            </button>
+          )}
+        </div>
+
+        {/* Author */}
+        <div className="flex items-center gap-3 pt-4 mt-4 border-t border-gray-50">
+          <div className="w-10 h-10 rounded-full bg-gradient-to-br from-green-400 to-emerald-500 flex items-center justify-center text-white font-bold text-sm flex-shrink-0">
+            {testimonial.name.charAt(0)}
+          </div>
+          <div className="min-w-0">
+            <p className="font-semibold text-gray-900 text-sm truncate">{testimonial.name}</p>
+            <p className="text-xs text-gray-500">{testimonial.date}</p>
+          </div>
+          {testimonial.verified && (
+            <div className="ml-auto flex items-center gap-1 text-green-600 flex-shrink-0">
+              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+              </svg>
+              <span className="text-xs font-medium">Vérifié</span>
+            </div>
+          )}
+        </div>
+
+        {/* Google link */}
+        <a
+          href={googleMapsUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-3 pt-3 border-t border-gray-50 text-xs text-gray-400 hover:text-gray-600 flex items-center gap-1 transition-colors"
+        >
+          <ExternalLink className="w-3 h-3" />
+          Voir sur Google
+        </a>
+      </div>
+    </motion.div>
+  );
+}
 
 export function Testimonials() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -183,53 +308,12 @@ export function Testimonials() {
         {/* Testimonials Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {testimonials.map((testimonial, index) => (
-            <motion.div
+            <TestimonialCard
               key={testimonial.id}
-              initial={{ opacity: 0, y: 50 }}
-              animate={isVisible ? { opacity: 1, y: 0 } : {}}
-              transition={{
-                duration: 0.6,
-                delay: 0.4 + index * 0.1,
-                ease: [0.25, 0.1, 0.25, 1],
-              }}
-            >
-              <div className="group relative bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 p-6 h-full flex flex-col">
-                {/* Quote icon */}
-                <Quote className="w-8 h-8 text-green-200 mb-4 group-hover:text-green-300 transition-colors" />
-
-                {/* Stars */}
-                <div className="flex items-center gap-0.5 mb-3">
-                  {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star key={i} className="w-4 h-4 text-yellow-400 fill-yellow-400" />
-                  ))}
-                  <span className="ml-2 text-xs font-medium text-gray-400">Google</span>
-                </div>
-
-                {/* Comment */}
-                <p className="text-gray-700 leading-relaxed mb-6 flex-grow">
-                  "{testimonial.comment}"
-                </p>
-
-                {/* Author */}
-                <div className="flex items-center gap-3 pt-4 border-t border-gray-50">
-                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-green-400 to-emerald-500 flex items-center justify-center text-white font-bold text-sm">
-                    {testimonial.name.charAt(0)}
-                  </div>
-                  <div>
-                    <p className="font-semibold text-gray-900 text-sm">{testimonial.name}</p>
-                    <p className="text-xs text-gray-500">{testimonial.date}</p>
-                  </div>
-                  {testimonial.verified && (
-                    <div className="ml-auto flex items-center gap-1 text-green-600">
-                      <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                      </svg>
-                      <span className="text-xs font-medium">Vérifié</span>
-                    </div>
-                  )}
-                </div>
-              </div>
-            </motion.div>
+              testimonial={testimonial}
+              index={index}
+              isVisible={isVisible}
+            />
           ))}
         </div>
 

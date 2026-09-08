@@ -595,7 +595,7 @@ export function BookingForm() {
     <section 
       id="booking" 
       ref={sectionRef}
-      className="relative py-24 bg-gradient-to-b from-gray-50 to-white overflow-hidden"
+      className="relative py-12 lg:py-16 scroll-mt-28 bg-gradient-to-b from-gray-50 to-white overflow-hidden"
     >
       <div className="absolute inset-0">
         <div className="absolute top-20 right-10 w-96 h-96 bg-purple-200 rounded-full blur-3xl opacity-30" />
@@ -607,7 +607,7 @@ export function BookingForm() {
           initial={{ opacity: 0, y: 30 }}
           animate={isVisible ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="text-center mb-12"
+          className="text-center mb-6 lg:mb-8"
         >
           <span className="inline-block px-4 py-2 rounded-full bg-gradient-to-r from-green-100 to-emerald-100 text-green-700 text-sm font-medium mb-4">
             Réservation

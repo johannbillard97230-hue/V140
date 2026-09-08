@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Calendar, 
@@ -30,6 +30,27 @@ const steps = [
   { id: 3, title: 'Confirmation', icon: Check },
 ];
 
+// Robust scroll function with dynamic header offset calculation
+function scrollToBookingSection() {
+  const element = document.getElementById('booking');
+  if (!element) return;
+
+  // Dynamically calculate header height (marquee + navbar + breathing room)
+  const marquee = document.querySelector('[data-marquee]');
+  const navbar = document.querySelector('nav');
+  const marqueeHeight = marquee?.getBoundingClientRect().height || 40;
+  const navbarHeight = navbar?.getBoundingClientRect().height || 64;
+  const offset = marqueeHeight + navbarHeight + 16; // 16px = small breathing room
+
+  const elementTop = element.getBoundingClientRect().top + window.scrollY;
+  const scrollTo = Math.max(0, elementTop - offset);
+
+  window.scrollTo({
+    top: scrollTo,
+    behavior: 'smooth'
+  });
+}
+
 export function BookingForm() {
   const { ref: sectionRef, isVisible } = useScrollAnimation<HTMLElement>({ threshold: 0.1 });
   const [currentStep, setCurrentStep] = useState(1);
@@ -57,6 +78,65 @@ export function BookingForm() {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [availabilityError, setAvailabilityError] = useState<string | null>(null);
 
+  // ─── ROBUST SCROLL HANDLING ───
+  useEffect(() => {
+    const element = document.getElementById('booking');
+    if (!element) return;
+
+    // 1. Monkey-patch scrollIntoView on the booking element
+    // This intercepts ALL scrollIntoView calls from Hero, Navbar, etc.
+    const originalScrollIntoView = element.scrollIntoView.bind(element);
+    element.scrollIntoView = (options?: ScrollIntoViewOptions | boolean) => {
+      // Always use our robust scroll instead of native scrollIntoView
+      scrollToBookingSection();
+    };
+
+    // 2. Intercept clicks on ANY link pointing to #booking
+    const handleBookingLinkClick = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      const anchor = target.closest('a[href="#booking"]');
+      if (!anchor) return;
+      e.preventDefault();
+      scrollToBookingSection();
+    };
+    document.addEventListener('click', handleBookingLinkClick);
+
+    // 3. Handle initial page load with #booking hash
+    // Wait for layout to fully stabilize (images, fonts, animations)
+    let initialScrollTimer: ReturnType<typeof setTimeout>;
+    const handleInitialHash = () => {
+      if (window.location.hash === '#booking') {
+        // Small delay to let Framer Motion animations and images settle
+        initialScrollTimer = setTimeout(() => {
+          scrollToBookingSection();
+        }, 150);
+      }
+    };
+
+    if (document.readyState === 'complete') {
+      handleInitialHash();
+    } else {
+      window.addEventListener('load', handleInitialHash);
+    }
+
+    // 4. Handle hash changes (back/forward navigation)
+    const handleHashChange = () => {
+      if (window.location.hash === '#booking') {
+        scrollToBookingSection();
+      }
+    };
+    window.addEventListener('hashchange', handleHashChange);
+
+    return () => {
+      element.scrollIntoView = originalScrollIntoView;
+      document.removeEventListener('click', handleBookingLinkClick);
+      window.removeEventListener('load', handleInitialHash);
+      window.removeEventListener('hashchange', handleHashChange);
+      clearTimeout(initialScrollTimer);
+    };
+  }, []);
+  // ───────────────────────────────
+
   const updateFormData = (field: keyof BookingFormData, value: any) => {
     setFormData(prev => ({ ...prev, [field]: value }));
     if (errors[field]) {
@@ -73,11 +153,10 @@ export function BookingForm() {
     if (range.to) {
       updateFormData('endDate', range.to);
       setIsCalendarOpen(false);
-      setAvailabilityError(null); // Clear error when valid range is selected
+      setAvailabilityError(null);
     } else {
       updateFormData('endDate', null);
     }
-    // Also clear error when starting a new selection
     if (!range.from && !range.to) {
       setAvailabilityError(null);
     }
@@ -206,7 +285,6 @@ export function BookingForm() {
 
         return (
           <div className="space-y-6">
-            {/* Calendrier dans un popover */}
             <div>
               <Label className="text-gray-700 mb-3 block">Sélectionnez vos dates</Label>
               <Popover open={isCalendarOpen} onOpenChange={setIsCalendarOpen}>
@@ -241,7 +319,6 @@ export function BookingForm() {
                 </PopoverContent>
               </Popover>
 
-              {/* Availability alert — shown OUTSIDE only when calendar is CLOSED */}
               <AnimatePresence>
                 {availabilityError && !isCalendarOpen && (
                   <motion.div
@@ -264,7 +341,6 @@ export function BookingForm() {
               )}
             </div>
 
-            {/* Flight times */}
             <div className="grid sm:grid-cols-2 gap-6">
               <div>
                 <Label className="text-gray-700 mb-2 block">Heure de décollage à Beauvais</Label>
@@ -284,7 +360,6 @@ export function BookingForm() {
               </div>
             </div>
 
-            {/* Return Flight Number */}
             <div>
               <Label className="text-gray-700 mb-2 block">
                 Numéro de vol retour <span className="text-red-500">*</span>
@@ -301,7 +376,6 @@ export function BookingForm() {
               {errors.returnFlightNumber && <p className="text-red-500 text-xs mt-1">{errors.returnFlightNumber}</p>}
             </div>
 
-            {/* Travelers and Bags */}
             <div className="grid sm:grid-cols-2 gap-6">
               <div>
                 <Label className="text-gray-700 mb-2 block">

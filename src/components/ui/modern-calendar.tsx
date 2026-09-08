@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { ChevronLeft, ChevronRight, X, RotateCcw } from "lucide-react"
+import { ChevronLeft, ChevronRight, X, RotateCcw, AlertTriangle } from "lucide-react"
 import { format, addMonths, subMonths, startOfMonth, endOfMonth, eachDayOfInterval, isSameMonth, isSameDay, isBefore } from "date-fns"
 import { fr } from "date-fns/locale"
 import { cn } from "@/lib/utils"
@@ -15,6 +15,7 @@ interface DateRange {
 interface ModernCalendarProps {
   selected: DateRange
   onSelect: (range: DateRange) => void
+  onInvalidRange?: (from: Date, attemptedTo: Date) => void
   onClose?: () => void
   className?: string
 }
@@ -31,8 +32,8 @@ const isRangeContinuouslyAllowed = (from: Date, to: Date) => {
   return days.every((day) => isDateAllowed(day))
 }
 
-export function ModernCalendar({ selected, onSelect, onClose, className }: ModernCalendarProps) {
-  const [currentMonth, setCurrentMonth] = React.useState(startOfMonth(new Date())) // Start at current month
+export function ModernCalendar({ selected, onSelect, onInvalidRange, onClose, className }: ModernCalendarProps) {
+  const [currentMonth, setCurrentMonth] = React.useState(startOfMonth(new Date()))
   const [hoveredDate, setHoveredDate] = React.useState<Date | null>(null)
 
   const days = eachDayOfInterval({
@@ -42,10 +43,9 @@ export function ModernCalendar({ selected, onSelect, onClose, className }: Moder
 
   const weekDays = ["Lun", "Mar", "Mer", "Jeu", "Ven", "Sam", "Dim"]
 
-  // Calculate empty slots before first day of month (Monday = 0)
   const firstDayOfMonth = days[0]
-  const dayOfWeek = firstDayOfMonth.getDay() // 0=Sunday, 1=Monday, ..., 6=Saturday
-  const emptySlots = dayOfWeek === 0 ? 6 : dayOfWeek - 1 // Convert to Monday-start format
+  const dayOfWeek = firstDayOfMonth.getDay()
+  const emptySlots = dayOfWeek === 0 ? 6 : dayOfWeek - 1
 
   const handleDateClick = (date: Date) => {
     if (isDateDisabled(date)) return
@@ -54,7 +54,7 @@ export function ModernCalendar({ selected, onSelect, onClose, className }: Moder
       // Start new selection
       onSelect({ from: date, to: undefined })
     } else if (selected.from && !selected.to) {
-      // Complete selection — must be within same continuous allowed block
+      // Complete selection
       const from = selected.from
       const to = date
 
@@ -62,14 +62,18 @@ export function ModernCalendar({ selected, onSelect, onClose, className }: Moder
         // User selected a date before the start — reverse
         if (isRangeContinuouslyAllowed(to, from)) {
           onSelect({ from: to, to: from })
+        } else {
+          // Range is not continuously allowed — notify parent
+          onInvalidRange?.(from, to)
         }
-        // If not continuously allowed, do nothing (ignore click)
       } else {
         // Normal forward selection
         if (isRangeContinuouslyAllowed(from, to)) {
           onSelect({ from, to })
+        } else {
+          // Range is not continuously allowed — notify parent
+          onInvalidRange?.(from, to)
         }
-        // If not continuously allowed, do nothing (ignore click)
       }
     }
   }
@@ -87,14 +91,11 @@ export function ModernCalendar({ selected, onSelect, onClose, className }: Moder
     return selected.to && isSameDay(date, selected.to)
   }
 
-  // Hover preview: only show if the entire range from selected.from to hoveredDate is allowed
   const isHoveredInRange = (date: Date) => {
     if (!selected.from || selected.to || !hoveredDate) return false
     if (isBefore(hoveredDate, selected.from)) return false
     if (isDateDisabled(date)) return false
-    // Only highlight if the full range would be continuously allowed
     if (!isRangeContinuouslyAllowed(selected.from, hoveredDate)) {
-      // Only highlight dates that are within the same allowed block as selected.from
       const allRanges = [...juneAllowedRanges, ...julyAllowedRanges, ...augustAllowedRanges, ...septemberAllowedRanges]
       const fromBlock = allRanges.find(
         (r) => selected.from! >= r.from && selected.from! <= r.to
@@ -166,7 +167,6 @@ export function ModernCalendar({ selected, onSelect, onClose, className }: Moder
 
       {/* Days grid */}
       <div className="grid grid-cols-7 gap-1">
-        {/* Empty slots for days before start of month */}
         {Array.from({ length: emptySlots }).map((_, i) => (
           <div key={`empty-${i}`} className="aspect-square" />
         ))}

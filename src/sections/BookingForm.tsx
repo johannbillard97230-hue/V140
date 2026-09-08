@@ -9,7 +9,8 @@ import {
   MapPin,
   Shield,
   Zap,
-  Plane
+  Plane,
+  AlertTriangle
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -54,13 +55,38 @@ export function BookingForm() {
     bags: 1,
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [availabilityError, setAvailabilityError] = useState<string | null>(null);
 
   const updateFormData = (field: keyof BookingFormData, value: any) => {
     setFormData(prev => ({ ...prev, [field]: value }));
-    // Clear error for this field when user types
     if (errors[field]) {
       setErrors(prev => { const next = { ...prev }; delete next[field]; return next; });
     }
+  };
+
+  const handleCalendarSelect = (range: { from: Date | undefined; to: Date | undefined }) => {
+    if (range.from) {
+      updateFormData('startDate', range.from);
+    } else {
+      updateFormData('startDate', null);
+    }
+    if (range.to) {
+      updateFormData('endDate', range.to);
+      setIsCalendarOpen(false);
+      setAvailabilityError(null); // Clear error when valid range is selected
+    } else {
+      updateFormData('endDate', null);
+    }
+    // Also clear error when starting a new selection
+    if (!range.from && !range.to) {
+      setAvailabilityError(null);
+    }
+  };
+
+  const handleInvalidRange = (_from: Date, _attemptedTo: Date) => {
+    setAvailabilityError(
+      "Nous sommes complets pour tout ou partie de la période que vous essayez de sélectionner. Merci de choisir d'autres dates."
+    );
   };
 
   const validateStep1 = () => {
@@ -93,44 +119,36 @@ export function BookingForm() {
 
   const calculateDays = () => {
     if (!formData.startDate || !formData.endDate) return 0;
-    // Normalize dates to midnight to avoid timezone/hour drift
     const start = new Date(formData.startDate);
     start.setHours(0, 0, 0, 0);
     const end = new Date(formData.endDate);
     end.setHours(0, 0, 0, 0);
     const diff = end.getTime() - start.getTime();
-    // +1 to count inclusively (e.g., 17th to 23rd = 7 days)
     return Math.round(diff / (1000 * 60 * 60 * 24)) + 1;
   };
 
   const calculatePrice = () => {
     const days = calculateDays();
     if (days <= 0) return 0;
-
     let price = 7 + (days - 1) * 6;
-
-    // Shuttle fee: 10€ for less than 7 days
     if (days < 7) {
       price += 10;
     }
-
-    // Apply discounts
     if (days >= 7) {
-      price -= 6; // 1 day free (6€)
+      price -= 6;
     }
     if (formData.newsletter) {
-      price -= 12; // Newsletter: -2 days (-12€) regardless of duration
+      price -= 12;
     }
-
     return Math.max(price, 0);
   };
 
   const nextStep = () => {
     if (currentStep === 1 && !validateStep1()) {
-      return; // Block navigation if validation fails
+      return;
     }
     if (currentStep === 2 && !validateStep2()) {
-      return; // Block navigation if validation fails
+      return;
     }
     if (currentStep < steps.length) {
       setCurrentStep(prev => prev + 1);
@@ -149,7 +167,6 @@ export function BookingForm() {
     const days = calculateDays();
     const price = calculatePrice();
 
-    // Store booking data in localStorage for the payment page
     const bookingData = {
       firstName: formData.firstName,
       lastName: formData.lastName,
@@ -175,8 +192,6 @@ export function BookingForm() {
 
     localStorage.setItem('bookingData', JSON.stringify(bookingData));
     localStorage.removeItem('paymentInitiated');
-
-    // Redirect to payment page
     navigate('/payment');
   };
 
@@ -219,22 +234,30 @@ export function BookingForm() {
                 <PopoverContent className="w-auto p-0 border-none shadow-2xl" align="center">
                   <ModernCalendar
                     selected={dateRange}
-                    onSelect={(range) => {
-                      if (range?.from) {
-                        updateFormData('startDate', range.from);
-                      } else {
-                        updateFormData('startDate', null);
-                      }
-                      if (range?.to) {
-                        updateFormData('endDate', range.to);
-                        setIsCalendarOpen(false);
-                      } else {
-                        updateFormData('endDate', null);
-                      }
-                    }}
+                    onSelect={handleCalendarSelect}
+                    onInvalidRange={handleInvalidRange}
                   />
                 </PopoverContent>
               </Popover>
+
+              {/* Availability alert — appears when user tries invalid range */}
+              <AnimatePresence>
+                {availabilityError && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -8, height: 0 }}
+                    animate={{ opacity: 1, y: 0, height: 'auto' }}
+                    exit={{ opacity: 0, y: -8, height: 0 }}
+                    transition={{ duration: 0.25 }}
+                    className="mt-2"
+                  >
+                    <div className="flex items-start gap-2.5 p-3 rounded-xl bg-amber-50 border border-amber-200 text-amber-800 text-sm">
+                      <AlertTriangle className="w-4 h-4 text-amber-500 mt-0.5 flex-shrink-0" />
+                      <p>{availabilityError}</p>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+
               {(errors.startDate || errors.endDate) && (
                 <p className="text-red-500 text-xs mt-1">{errors.startDate || errors.endDate}</p>
               )}
@@ -336,7 +359,6 @@ export function BookingForm() {
       case 2:
         return (
           <div className="space-y-5">
-            {/* Nom et Prénom */}
             <div className="grid sm:grid-cols-2 gap-4">
               <div>
                 <Label className="text-gray-700 mb-2 block">
@@ -364,7 +386,6 @@ export function BookingForm() {
               </div>
             </div>
 
-            {/* Email */}
             <div>
               <Label className="text-gray-700 mb-2 block">
                 Email <span className="text-red-500">*</span>
@@ -382,22 +403,20 @@ export function BookingForm() {
               {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email}</p>}
             </div>
 
-{/* Téléphone */}
-<div>
-  <Label className="text-gray-700 mb-2 block">
-    Téléphone <span className="text-red-500">*</span>
-  </Label>
-  <Input
-    type="tel"
-    placeholder="06 12 34 56 78"
-    value={formData.phone}
-    onChange={(e) => updateFormData('phone', e.target.value)}
-    className={errors.phone ? 'border-red-500 focus-visible:ring-red-500' : ''}
-  />
-  {errors.phone && <p className="text-red-500 text-xs mt-1">{errors.phone}</p>}
-</div>
+            <div>
+              <Label className="text-gray-700 mb-2 block">
+                Téléphone <span className="text-red-500">*</span>
+              </Label>
+              <Input
+                type="tel"
+                placeholder="06 12 34 56 78"
+                value={formData.phone}
+                onChange={(e) => updateFormData('phone', e.target.value)}
+                className={errors.phone ? 'border-red-500 focus-visible:ring-red-500' : ''}
+              />
+              {errors.phone && <p className="text-red-500 text-xs mt-1">{errors.phone}</p>}
+            </div>
 
-            {/* Adresse de facturation */}
             <div className="pt-2">
               <h4 className="text-sm font-semibold text-gray-900 mb-3 flex items-center gap-2">
                 <MapPin className="w-4 h-4 text-gray-500" />
@@ -436,7 +455,6 @@ export function BookingForm() {
               </div>
             </div>
 
-            {/* Newsletter */}
             <div className="flex items-center justify-between p-4 rounded-xl bg-green-50 border border-green-200">
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-full bg-green-500/20 flex items-center justify-center">
@@ -510,7 +528,6 @@ export function BookingForm() {
                 <p className="text-sm text-gray-600">{formData.billingPostalCode} {formData.billingCity}</p>
               </div>
 
-              {/* Détail des prix */}
               <div className="border-t border-gray-200 pt-3 space-y-2">
                 <div className="flex justify-between text-sm">
                   <span className="text-gray-500">Parking ({days} jours)</span>
@@ -579,14 +596,12 @@ export function BookingForm() {
       ref={sectionRef}
       className="relative py-24 bg-gradient-to-b from-gray-50 to-white overflow-hidden"
     >
-      {/* Background */}
       <div className="absolute inset-0">
         <div className="absolute top-20 right-10 w-96 h-96 bg-purple-200 rounded-full blur-3xl opacity-30" />
         <div className="absolute bottom-20 left-10 w-80 h-80 bg-blue-200 rounded-full blur-3xl opacity-30" />
       </div>
 
       <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isVisible ? { opacity: 1, y: 0 } : {}}
@@ -607,14 +622,12 @@ export function BookingForm() {
           </p>
         </motion.div>
 
-        {/* Form Card */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isVisible ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.2 }}
           className="bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden"
         >
-          {/* Progress Steps */}
           <div className="bg-gradient-to-r from-slate-900 to-slate-800 p-6">
             <div className="flex items-center justify-between">
               {steps.map((step, index) => (
@@ -647,7 +660,6 @@ export function BookingForm() {
             </div>
           </div>
 
-          {/* Form Content */}
           <div className="p-6 sm:p-8">
             <AnimatePresence mode="wait">
               <motion.div
@@ -661,7 +673,6 @@ export function BookingForm() {
               </motion.div>
             </AnimatePresence>
 
-            {/* Navigation Buttons */}
             <div className="flex justify-between mt-8 pt-6 border-t">
               <Button
                 variant="outline"
@@ -694,7 +705,6 @@ export function BookingForm() {
           </div>
         </motion.div>
 
-        {/* Info Cards */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isVisible ? { opacity: 1, y: 0 } : {}}

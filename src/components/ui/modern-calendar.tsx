@@ -17,6 +17,7 @@ interface ModernCalendarProps {
   onSelect: (range: DateRange) => void
   onInvalidRange?: (from: Date, attemptedTo: Date) => void
   onClose?: () => void
+  invalidRangeMessage?: string | null
   className?: string
 }
 
@@ -32,7 +33,7 @@ const isRangeContinuouslyAllowed = (from: Date, to: Date) => {
   return days.every((day) => isDateAllowed(day))
 }
 
-export function ModernCalendar({ selected, onSelect, onInvalidRange, onClose, className }: ModernCalendarProps) {
+export function ModernCalendar({ selected, onSelect, onInvalidRange, onClose, invalidRangeMessage, className }: ModernCalendarProps) {
   const [currentMonth, setCurrentMonth] = React.useState(startOfMonth(new Date()))
   const [hoveredDate, setHoveredDate] = React.useState<Date | null>(null)
 
@@ -200,6 +201,16 @@ export function ModernCalendar({ selected, onSelect, onInvalidRange, onClose, cl
         })}
       </div>
 
+      {/* Availability alert — INSIDE the calendar, right after the grid */}
+      {invalidRangeMessage && (
+        <div className="mt-3 p-3 rounded-xl bg-amber-50 border border-amber-200 text-amber-800 text-sm animate-in fade-in slide-in-from-top-2 duration-200">
+          <div className="flex items-start gap-2">
+            <AlertTriangle className="w-4 h-4 text-amber-500 mt-0.5 flex-shrink-0" />
+            <p>{invalidRangeMessage}</p>
+          </div>
+        </div>
+      )}
+
       {/* Reset button */}
       {selected.from && (
         <div className="mt-3 text-center">
@@ -215,7 +226,7 @@ export function ModernCalendar({ selected, onSelect, onInvalidRange, onClose, cl
 
       {/* Selected dates display */}
       {selected.from && (
-        <div className="mt-4 p-3 bg-gray-50 rounded-lg text-center">
+        <div className="mt-3 p-3 bg-gray-50 rounded-lg text-center">
           <p className="text-sm text-gray-600">
             {selected.to ? (
               <>

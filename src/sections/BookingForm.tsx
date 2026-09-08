@@ -236,13 +236,14 @@ export function BookingForm() {
                     selected={dateRange}
                     onSelect={handleCalendarSelect}
                     onInvalidRange={handleInvalidRange}
+                    invalidRangeMessage={availabilityError}
                   />
                 </PopoverContent>
               </Popover>
 
-              {/* Availability alert — appears when user tries invalid range */}
+              {/* Availability alert — shown OUTSIDE only when calendar is CLOSED */}
               <AnimatePresence>
-                {availabilityError && (
+                {availabilityError && !isCalendarOpen && (
                   <motion.div
                     initial={{ opacity: 0, y: -8, height: 0 }}
                     animate={{ opacity: 1, y: 0, height: 'auto' }}

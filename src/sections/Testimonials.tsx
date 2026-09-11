@@ -155,17 +155,15 @@ function TestimonialCard({ testimonial, index, isVisible }: { testimonial: Testi
           {needsExpand && (
             <button
               onClick={() => setIsExpanded(!isExpanded)}
-              className="mt-2 text-sm font-medium text-green-600 hover:text-green-700 flex items-center gap-1 transition-colors group/btn"
+              className="mt-2 text-sm font-semibold text-gray-800 hover:text-green-600 hover:underline cursor-pointer flex items-center gap-1.5 transition-colors py-1"
             >
               {isExpanded ? (
                 <>
-                  Réduire
-                  <ChevronUp className="w-3.5 h-3.5 transition-transform group-hover/btn:-translate-y-0.5" />
+                  Réduire ↑
                 </>
               ) : (
                 <>
-                  Lire la suite
-                  <ChevronDown className="w-3.5 h-3.5 transition-transform group-hover/btn:translate-y-0.5" />
+                  Lire l'avis complet ↓
                 </>
               )}
             </button>

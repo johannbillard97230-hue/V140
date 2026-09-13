@@ -1,11 +1,11 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
-import { Briefcase, ExternalLink, Plane } from 'lucide-react';
+import { ExternalLink, Plane } from 'lucide-react';
 
 const AMAZON_LINK = 'https://link.amazon/B02dbcyhr';
+const PRODUCT_IMAGE = '/images/sac-cabine-ryanair-amazon.png';
 
 function trackAmazonClick() {
-  // Google Analytics 4 event
   if (typeof window !== 'undefined' && (window as any).gtag) {
     (window as any).gtag('event', 'amazon_ryanair_bag_click', {
       event_category: 'affiliation',
@@ -13,9 +13,6 @@ function trackAmazonClick() {
       value: 1,
     });
   }
-  // Fallback: console log for debugging
-  // eslint-disable-next-line no-console
-  console.log('[Analytics] amazon_ryanair_bag_click');
 }
 
 export function AmazonAffiliate() {
@@ -34,12 +31,23 @@ export function AmazonAffiliate() {
           transition={{ duration: 0.5 }}
           className="bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow duration-300 overflow-hidden"
         >
-          <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6 p-4 sm:p-5">
-            {/* Product visual — compact icon representation */}
+          <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-5 p-4 sm:p-5">
+            {/* Product image — compact and clean */}
             <div className="flex-shrink-0">
-              <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-xl bg-gradient-to-br from-blue-50 to-indigo-50 border border-blue-100 flex items-center justify-center">
-                <Briefcase className="w-8 h-8 sm:w-10 sm:h-10 text-blue-500" />
-              </div>
+              <a
+                href={AMAZON_LINK}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={trackAmazonClick}
+                className="block w-20 h-20 sm:w-24 sm:h-24 rounded-xl overflow-hidden border border-gray-100 bg-gray-50 hover:opacity-90 transition-opacity"
+              >
+                <img
+                  src={PRODUCT_IMAGE}
+                  alt="Sac cabine 30L compatible Ryanair — 45 x 36 x 20 cm"
+                  className="w-full h-full object-cover"
+                  loading="lazy"
+                />
+              </a>
             </div>
 
             {/* Content */}
@@ -71,7 +79,7 @@ export function AmazonAffiliate() {
             </div>
           </div>
 
-          {/* Affiliate disclosure — subtle but visible */}
+          {/* Affiliate disclosure */}
           <div className="px-4 sm:px-5 pb-3 pt-0">
             <p className="text-[10px] sm:text-xs text-gray-400 text-center sm:text-left">
               Lien affilié — Free Day Parking Beauvais peut percevoir une commission sur les achats éligibles, sans coût supplémentaire pour vous.

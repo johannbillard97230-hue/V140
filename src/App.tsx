@@ -12,6 +12,7 @@ import { Footer } from './sections/Footer';
 import { Marquee } from './sections/Marquee';
 import { CookieBanner } from './sections/CookieBanner';
 import { SocialProof } from './sections/SocialProof';
+import { AmazonAffiliate } from './sections/AmazonAffiliate';
 import PaymentPage from './pages/Payment';
 import SuccessPage from './pages/Success';
 
@@ -29,6 +30,7 @@ function HomePage() {
         <BookingForm />
         <FAQ />
         <Partners />
+        <AmazonAffiliate />
       </main>
       <Footer />
       <CookieBanner />

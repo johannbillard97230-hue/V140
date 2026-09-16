@@ -1,5 +1,5 @@
 import { motion, useInView } from 'framer-motion';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { ExternalLink, Plane, ShoppingBag } from 'lucide-react';
 
 interface AmazonProduct {
@@ -9,7 +9,6 @@ interface AmazonProduct {
   alt: string;
   title: string;
   description: string;
-  cta: string;
   eventName: string;
 }
 
@@ -21,7 +20,6 @@ const products: AmazonProduct[] = [
     alt: 'Sac cabine 30L compatible Ryanair — 45 x 36 x 20 cm — idéal pour parking aéroport Beauvais',
     title: 'Sac cabine 30L',
     description: 'Format cabine approuvé Ryanair. Partez léger depuis le parking de l\'aéroport de Beauvais-Tillé.',
-    cta: 'Voir sur Amazon',
     eventName: 'amazon_ryanair_bag_click',
   },
   {
@@ -31,7 +29,6 @@ const products: AmazonProduct[] = [
     alt: 'Sac de voyage Ryanair recommandé par Free Day Parking Beauvais — parking pas cher aéroport Beauvais',
     title: 'Sac de voyage Ryanair',
     description: 'Pratique et conforme aux dimensions cabine. Le compagnon idéal pour votre prochain départ de Beauvais.',
-    cta: 'Voir sur Amazon',
     eventName: 'amazon_ryanair_bag_2_click',
   },
 ];
@@ -46,6 +43,28 @@ function trackAmazonClick(eventName: string, productId: string) {
   }
 }
 
+function ProductImage({ src, alt }: { src: string; alt: string }) {
+  const [error, setError] = useState(false);
+
+  if (error) {
+    return (
+      <div className="w-full h-full flex items-center justify-center bg-gray-100 text-gray-400">
+        <ShoppingBag className="w-8 h-8" />
+      </div>
+    );
+  }
+
+  return (
+    <img
+      src={src}
+      alt={alt}
+      className="w-full h-full object-cover"
+      loading="lazy"
+      onError={() => setError(true)}
+    />
+  );
+}
+
 function ProductCard({ product, index }: { product: AmazonProduct; index: number }) {
   return (
     <motion.div
@@ -55,7 +74,7 @@ function ProductCard({ product, index }: { product: AmazonProduct; index: number
       className="bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow duration-300 overflow-hidden"
     >
       <div className="flex flex-col sm:flex-row items-center gap-4 p-4 sm:p-5">
-        {/* Product image */}
+        {/* Product image with fallback */}
         <a
           href={product.link}
           target="_blank"
@@ -63,12 +82,7 @@ function ProductCard({ product, index }: { product: AmazonProduct; index: number
           onClick={() => trackAmazonClick(product.eventName, product.id)}
           className="flex-shrink-0 block w-20 h-20 sm:w-24 sm:h-24 rounded-xl overflow-hidden border border-gray-100 bg-gray-50 hover:opacity-90 transition-opacity"
         >
-          <img
-            src={product.image}
-            alt={product.alt}
-            className="w-full h-full object-cover"
-            loading="lazy"
-          />
+          <ProductImage src={product.image} alt={product.alt} />
         </a>
 
         {/* Content */}
@@ -86,7 +100,7 @@ function ProductCard({ product, index }: { product: AmazonProduct; index: number
             onClick={() => trackAmazonClick(product.eventName, product.id)}
             className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-gray-900 hover:bg-gray-800 text-white text-sm font-medium transition-colors"
           >
-            {product.cta}
+            Voir sur Amazon
             <ExternalLink className="w-3.5 h-3.5" />
           </a>
         </div>
@@ -102,7 +116,7 @@ export function AmazonAffiliate() {
   return (
     <section
       ref={sectionRef}
-      className="relative py-8 lg:py-10 bg-gradient-to-b from-white to-gray-50"
+      className="relative py-8 lg:py-10 bg-gradient-to-b from-gray-50 to-white"
     >
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section header — very discreet */}
@@ -112,9 +126,9 @@ export function AmazonAffiliate() {
           transition={{ duration: 0.4 }}
           className="flex items-center justify-center gap-2 mb-5"
         >
-          <ShoppingBag className="w-4 h-4 text-gray-400" />
+          <Plane className="w-4 h-4 text-gray-400" />
           <span className="text-xs font-medium text-gray-400 uppercase tracking-wider">
-            Recommandations voyageurs
+            Conseils voyageurs
           </span>
         </motion.div>
 

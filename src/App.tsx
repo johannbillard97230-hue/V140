@@ -2,6 +2,7 @@ import { Routes, Route } from 'react-router-dom';
 import { Navbar } from './sections/Navbar';
 import { Hero } from './sections/Hero';
 import { Features } from './sections/Features';
+import { AmazonAffiliate } from './sections/AmazonAffiliate';
 import { ParkingTypes } from './sections/ParkingTypes';
 import { Comparison } from './sections/Comparison';
 import { Testimonials } from './sections/Testimonials';
@@ -12,7 +13,6 @@ import { Footer } from './sections/Footer';
 import { Marquee } from './sections/Marquee';
 import { CookieBanner } from './sections/CookieBanner';
 import { SocialProof } from './sections/SocialProof';
-import { AmazonAffiliate } from './sections/AmazonAffiliate';
 import PaymentPage from './pages/Payment';
 import SuccessPage from './pages/Success';
 
@@ -24,13 +24,13 @@ function HomePage() {
       <main>
         <Hero />
         <Features />
+        <AmazonAffiliate />
         <ParkingTypes />
         <Comparison />
         <Testimonials />
         <BookingForm />
         <FAQ />
         <Partners />
-        <AmazonAffiliate />
       </main>
       <Footer />
       <CookieBanner />

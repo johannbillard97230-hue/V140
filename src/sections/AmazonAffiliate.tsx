@@ -49,7 +49,7 @@ function ProductImage({ src, alt }: { src: string; alt: string }) {
   if (error) {
     return (
       <div className="w-full h-full flex items-center justify-center bg-gray-100 text-gray-400">
-        <ShoppingBag className="w-8 h-8" />
+        <ShoppingBag className="w-6 h-6" />
       </div>
     );
   }
@@ -68,42 +68,40 @@ function ProductImage({ src, alt }: { src: string; alt: string }) {
 function ProductCard({ product, index }: { product: AmazonProduct; index: number }) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 0, y: 16 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.4, delay: 0.1 + index * 0.1 }}
-      className="bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow duration-300 overflow-hidden"
+      transition={{ duration: 0.35, delay: 0.08 + index * 0.08 }}
+      className="bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow duration-300 overflow-hidden"
     >
-      <div className="flex flex-col sm:flex-row items-center gap-4 p-4 sm:p-5">
-        {/* Product image with fallback */}
+      <div className="flex items-center gap-3 p-3">
+        {/* Compact product image */}
         <a
           href={product.link}
           target="_blank"
           rel="noopener noreferrer"
           onClick={() => trackAmazonClick(product.eventName, product.id)}
-          className="flex-shrink-0 block w-20 h-20 sm:w-24 sm:h-24 rounded-xl overflow-hidden border border-gray-100 bg-gray-50 hover:opacity-90 transition-opacity"
+          className="flex-shrink-0 block w-14 h-14 rounded-lg overflow-hidden border border-gray-100 bg-gray-50 hover:opacity-90 transition-opacity"
         >
           <ProductImage src={product.image} alt={product.alt} />
         </a>
 
-        {/* Content */}
-        <div className="flex-1 text-center sm:text-left">
-          <p className="text-sm font-semibold text-gray-900 mb-1">{product.title}</p>
-          <p className="text-sm text-gray-600 leading-relaxed">{product.description}</p>
+        {/* Compact content */}
+        <div className="flex-1 min-w-0">
+          <p className="text-sm font-semibold text-gray-900 leading-tight">{product.title}</p>
+          <p className="text-xs text-gray-500 leading-snug mt-0.5">{product.description}</p>
         </div>
 
-        {/* CTA */}
-        <div className="flex-shrink-0">
-          <a
-            href={product.link}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={() => trackAmazonClick(product.eventName, product.id)}
-            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-gray-900 hover:bg-gray-800 text-white text-sm font-medium transition-colors"
-          >
-            Voir sur Amazon
-            <ExternalLink className="w-3.5 h-3.5" />
-          </a>
-        </div>
+        {/* Compact CTA */}
+        <a
+          href={product.link}
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={() => trackAmazonClick(product.eventName, product.id)}
+          className="flex-shrink-0 inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-gray-900 hover:bg-gray-800 text-white text-xs font-medium transition-colors"
+        >
+          Amazon
+          <ExternalLink className="w-3 h-3" />
+        </a>
       </div>
     </motion.div>
   );
@@ -116,38 +114,39 @@ export function AmazonAffiliate() {
   return (
     <section
       ref={sectionRef}
-      className="relative py-8 lg:py-10 bg-gradient-to-b from-gray-50 to-white"
+      className="relative py-5 bg-gray-50"
     >
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section header — very discreet */}
+        {/* Compact header */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={isVisible ? { opacity: 1 } : {}}
-          transition={{ duration: 0.4 }}
-          className="flex items-center justify-center gap-2 mb-5"
+          transition={{ duration: 0.3 }}
+          className="flex items-center gap-1.5 mb-3"
         >
-          <Plane className="w-4 h-4 text-gray-400" />
-          <span className="text-xs font-medium text-gray-400 uppercase tracking-wider">
+          <Plane className="w-3 h-3 text-gray-400" />
+          <span className="text-[11px] font-medium text-gray-400 uppercase tracking-wider">
             Conseils voyageurs
           </span>
         </motion.div>
 
-        {/* Products grid */}
-        <div className="grid sm:grid-cols-2 gap-4">
+        {/* Products — horizontal row on desktop */}
+        <div className="flex flex-col sm:flex-row gap-3">
           {products.map((product, index) => (
-            <ProductCard key={product.id} product={product} index={index} />
+            <div key={product.id} className="flex-1">
+              <ProductCard product={product} index={index} />
+            </div>
           ))}
         </div>
 
-        {/* Affiliate disclosure */}
+        {/* Compact affiliate disclosure */}
         <motion.p
           initial={{ opacity: 0 }}
           animate={isVisible ? { opacity: 1 } : {}}
-          transition={{ duration: 0.4, delay: 0.3 }}
-          className="text-[10px] sm:text-xs text-gray-400 text-center mt-4"
+          transition={{ duration: 0.3, delay: 0.2 }}
+          className="text-[10px] text-gray-400 mt-2 leading-tight"
         >
-          Liens affiliés Amazon — Free Day Parking Beauvais peut percevoir une commission sur les achats éligibles,
-          sans coût supplémentaire pour vous. Notre priorité reste votre parking pas cher à l'aéroport de Beauvais-Tillé (BVA).
+          Liens affiliés — commission possible sans surcoût. Priorité : votre parking pas cher à Beauvais-Tillé (BVA).
         </motion.p>
       </div>
     </section>

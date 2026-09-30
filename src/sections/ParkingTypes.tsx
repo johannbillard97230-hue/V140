@@ -158,7 +158,7 @@ export function ParkingTypes() {
         >
           <p className="text-gray-500 text-sm">
             Les deux types de parking incluent l'accès à notre navette 100% électrique
-            gratuite (pour 7 jours ou plus) vers l'aéroport de Beauvais-Tillé.
+            gratuite vers l'aéroport de Beauvais-Tillé.
           </p>
         </motion.div>
       </div>

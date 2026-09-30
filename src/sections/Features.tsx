@@ -17,7 +17,7 @@ const features = [
   {
     icon: Zap,
     title: 'Navette 100% Électrique',
-    description: 'Navette électrique gratuite pour toutes les réservations de 7 jours ou plus. Elle vous dépose directement au dépose minute de l\'aéroport en seulement 12 minutes.',
+    description: 'Navette électrique incluse dans votre réservation. Elle vous dépose directement au dépose minute de l\'aéroport en seulement 12 minutes.',
     color: 'from-green-400 to-emerald-500',
   },
   {
@@ -227,7 +227,7 @@ export function Features() {
                 </p>
                 <div className="flex flex-wrap gap-3">
                   {[
-                    'Navette gratuite dès 7 jours',
+                    'Navette gratuite',
                     'Parking sécurisé et clos',
                     '97 avis 5 étoiles Google',
                     'À 12 min de l\'aéroport BVA',

@@ -107,7 +107,7 @@ export function Hero() {
               transition={{ delay: 0.4 }}
               className="text-lg text-white/80 mb-8 max-w-xl"
             >
-              Parking Aéroport Beauvais : parking sécurisé avec navette gratuite dès 7 jours de réservation, disponible 24h/24. 
+              Parking Aéroport Beauvais : parking sécurisé avec navette incluse incluse dans la réservation, disponible 24h/24. 
               Départ tôt, retour tard, sans frais supplémentaires. Économisez jusqu'à <span className="text-green-400 font-bold">70 %</span> sur votre stationnement. 
               Réservez maintenant : <span className="text-green-400 font-bold">25 € TTC</span> pour 7 jours.
             </motion.p>

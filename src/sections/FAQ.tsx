@@ -14,7 +14,7 @@ const faqItems: FAQItem[] = [
   {
     id: 1,
     question: 'Comment fonctionne la navette électrique ?',
-    answer: "Notre navette 100% électrique vous dépose directement au dépose minute de l'aéroport de Beauvais en seulement 12 minutes. Elle est incluse gratuitement dans votre réservation de 7 jours ou plus. Notre navette est disponible 24h/24, 7j/7, y compris les jours fériés.",
+    answer: "Notre navette 100% électrique vous dépose directement au dépose minute de l'aéroport de Beauvais en seulement 12 minutes. Elle est incluse dans votre réservation. Notre navette est disponible 24h/24, 7j/7, y compris les jours fériés.",
   },
   {
     id: 2,

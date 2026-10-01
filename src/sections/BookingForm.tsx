@@ -610,7 +610,7 @@ export function BookingForm() {
                 </div>
                 {days < 7 && (
                   <div className="flex justify-between text-sm">
-                    <span className="text-gray-500">Navette aller/retour</span>
+                    <span className="text-gray-500">Forfait parking court séjour</span>
                     <span className="text-gray-700">10€</span>
                   </div>
                 )}

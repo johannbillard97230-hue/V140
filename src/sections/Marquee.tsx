@@ -103,7 +103,7 @@ export function Marquee() {
   const gradientClass = 'from-emerald-600 to-green-600';
 
   return (
-    <div className={`fixed top-0 left-0 right-0 z-[60] bg-gradient-to-r ${gradientClass} text-white py-2.5 overflow-hidden`}>
+    <div className={`fixed top-0 left-0 right-0 z-30 bg-gradient-to-r ${gradientClass} text-white py-2.5 overflow-hidden`}>
       <div className="flex items-center">
         <motion.div
           className="flex items-center gap-4 whitespace-nowrap"

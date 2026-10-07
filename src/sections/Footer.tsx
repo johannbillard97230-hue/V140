@@ -21,7 +21,7 @@ const footerLinks = {
   legal: [
     { label: 'Conditions générales', href: 'https://www.freedayparkingbeauvais.com/conditions-generales' },
     { label: 'Politique de confidentialité', href: 'https://www.freedayparkingbeauvais.com/conditions-generales' },
-    { label: 'Mentions légales', href: '/mentions-legales.html' },
+    { label: 'Mentions légales', href: 'https://www.freedayparkingbeauvais.com/conditions-generales' },
   ],
 };
 
@@ -65,7 +65,7 @@ export function Footer() {
                 L'alternative idéale au parking de l'aéroport de Beauvais. 
                 Parking sécurisé avec navette électrique 100% gratuite.
               </p>
-              
+
               {/* Trust badges */}
               <div className="flex items-center gap-4">
                 <div className="flex items-center gap-1">

@@ -1,6 +1,6 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
-import { Shield, Sun, Umbrella, CheckCircle, MapPin } from 'lucide-react';
+import { Shield, Sun, Umbrella, Building2, CheckCircle, MapPin } from 'lucide-react';
 
 const parkingOptions = [
   {
@@ -33,6 +33,22 @@ const parkingOptions = [
       'Sécurité renforcée en intérieur',
       'Accès par porte sectionnelle',
       'Idéal pour longue durée',
+    ],
+  },
+  {
+    title: 'Nouveau parking couvert à Beauvais',
+    image: '/images/parking-couvert-225m2-beauvais-aeroport.png',
+    alt: 'Nouveau parking couvert 225 m² Free Day Parking Beauvais à 6 minutes de l\'aéroport Paris-Beauvais — stationnement proche aéroport BVA',
+    icon: Building2,
+    address: 'Beauvais, à 6 min de l\'aéroport Paris-Beauvais',
+    description:
+      'Découvrez notre nouvel espace de stationnement couvert de 225 m² à Beauvais, situé à environ 6 minutes de l\'aéroport Paris-Beauvais. Une nouvelle solution pour stationner votre véhicule avant votre départ en voyage avec Free Day Parking Beauvais.',
+    features: [
+      'Parking couvert 225 m²',
+      'À 6 minutes de l\'aéroport Paris-Beauvais',
+      'Idéal pour votre départ en voyage',
+      'Solution de stationnement proche BVA',
+      'Nouvel espace disponible',
     ],
   },
 ];
@@ -84,13 +100,13 @@ export function ParkingTypes() {
             transition={{ duration: 0.6, delay: 0.25 }}
             className="text-lg text-gray-600 max-w-2xl mx-auto"
           >
-            Deux options de stationnement disponibles à proximité de l'aéroport de
+            Trois options de stationnement disponibles à proximité de l'aéroport de
             Beauvais-Tillé (BVA) pour répondre à tous vos besoins et budgets.
           </motion.p>
         </motion.div>
 
-        {/* Parking Options Grid */}
-        <div className="grid lg:grid-cols-2 gap-8">
+        {/* Parking Options Grid — 3 columns on large screens */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {parkingOptions.map((option, index) => (
             <motion.div
               key={option.title}
@@ -104,7 +120,7 @@ export function ParkingTypes() {
               className="group relative bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden hover:shadow-2xl transition-shadow duration-300"
             >
               {/* Image */}
-              <div className="relative h-64 sm:h-72 overflow-hidden">
+              <div className="relative h-56 sm:h-64 overflow-hidden">
                 <img
                   src={option.image}
                   alt={option.alt}
@@ -120,27 +136,27 @@ export function ParkingTypes() {
               </div>
 
               {/* Content */}
-              <div className="p-6 sm:p-8">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-green-400 to-emerald-500 flex items-center justify-center">
-                    <option.icon className="w-6 h-6 text-white" />
+              <div className="p-5 sm:p-6">
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-green-400 to-emerald-500 flex items-center justify-center">
+                    <option.icon className="w-5 h-5 text-white" />
                   </div>
-                  <h3 className="text-2xl font-bold text-gray-900">{option.title}</h3>
+                  <h3 className="text-xl font-bold text-gray-900 leading-tight">{option.title}</h3>
                 </div>
 
-                <div className="flex items-start gap-2 mb-4">
-                  <MapPin className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
-                  <span className="text-gray-700 font-medium">{option.address}</span>
+                <div className="flex items-start gap-2 mb-3">
+                  <MapPin className="w-4 h-4 text-green-600 flex-shrink-0 mt-0.5" />
+                  <span className="text-sm text-gray-700 font-medium">{option.address}</span>
                 </div>
 
-                <p className="text-gray-600 leading-relaxed mb-6">{option.description}</p>
+                <p className="text-sm text-gray-600 leading-relaxed mb-4">{option.description}</p>
 
                 {/* Features list */}
-                <ul className="space-y-3">
+                <ul className="space-y-2">
                   {option.features.map((feature) => (
-                    <li key={feature} className="flex items-start gap-3">
-                      <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                      <span className="text-gray-700">{feature}</span>
+                    <li key={feature} className="flex items-start gap-2">
+                      <CheckCircle className="w-4 h-4 text-green-500 flex-shrink-0 mt-0.5" />
+                      <span className="text-sm text-gray-700">{feature}</span>
                     </li>
                   ))}
                 </ul>
@@ -153,11 +169,11 @@ export function ParkingTypes() {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isVisible ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.7 }}
+          transition={{ duration: 0.6, delay: 0.9 }}
           className="mt-12 text-center"
         >
           <p className="text-gray-500 text-sm">
-            Les deux types de parking incluent l'accès à notre navette 100% électrique
+            Les trois types de parking incluent l'accès à notre navette 100% électrique
             gratuite vers l'aéroport de Beauvais-Tillé.
           </p>
         </motion.div>

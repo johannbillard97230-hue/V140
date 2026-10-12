@@ -279,15 +279,15 @@ export function Testimonials() {
                     <Star key={i} className="w-5 h-5 text-yellow-400 fill-yellow-400" />
                   ))}
                 </div>
-                <p className="text-sm font-bold text-gray-900">4,9 / 5</p>
+                <p className="text-sm font-bold text-gray-900">5 / 5</p>
               </div>
             </div>
 
             <div className="hidden sm:block w-px h-12 bg-gray-200" />
 
             <div className="text-center sm:text-left">
-              <p className="text-2xl font-bold text-gray-900">98 avis 5 étoiles</p>
-              <p className="text-sm text-gray-500">sur 101 avis Google</p>
+              <p className="text-2xl font-bold text-gray-900">99 avis 5 étoiles</p>
+              <p className="text-sm text-gray-500">sur 102 avis GMB</p>
             </div>
 
             <div className="hidden sm:block w-px h-12 bg-gray-200" />

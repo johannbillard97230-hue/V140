@@ -17,7 +17,7 @@ const features = [
   {
     icon: Zap,
     title: 'Navette 100% Électrique',
-    description: 'Navette électrique incluse dans votre réservation. Elle vous dépose directement au dépose minute de l\'aéroport en seulement 12 minutes.',
+    description: 'Navette électrique incluse dans votre réservation. Elle vous dépose directement au dépose minute de l\'aéroport en seulement 6 à 12 minutes, selon le stationnement attribué et les disponibilités.',
     color: 'from-green-400 to-emerald-500',
   },
   {
@@ -53,7 +53,7 @@ const features = [
 ];
 
 const stats = [
-  { icon: Star, value: '98', label: 'avis 5 étoiles sur 101' },
+  { icon: Star, value: '99', label: 'avis 5 étoiles sur 102' },
   { icon: Users, value: '100+', label: 'personnes nous recommandent' },
   { icon: CheckCircle, value: '70%', label: "d'économies" },
   { icon: Clock, value: '12', suffix: 'min', label: 'de navette' },
@@ -209,7 +209,7 @@ export function Features() {
               <div className="relative bg-gradient-to-br from-gray-900 to-black flex items-center justify-center p-4 lg:p-6">
                 <img
                   src="/parking-navette-aeroport-beauvais.jpg"
-                  alt="Free Day Parking Beauvais - Parking aéroport pas cher avec navette gratuite aller retour 25€ la semaine 98 avis 5 étoiles"
+                  alt="Free Day Parking Beauvais - Parking aéroport pas cher avec navette gratuite aller retour 25€ la semaine 99 avis 5 étoiles sur 102 avis GMB"
                   className="w-full h-auto max-h-[400px] lg:max-h-[450px] object-contain rounded-lg"
                   loading="lazy"
                 />
@@ -222,15 +222,15 @@ export function Features() {
                 <p className="text-gray-300 mb-6 leading-relaxed">
                   Le meilleur parking pas cher près de l'aéroport de Beauvais-Tillé (BVA). 
                   Profitez de notre navette électrique gratuite qui vous dépose en seulement 
-                  <strong className="text-white"> 12 minutes</strong> au dépose minute de l'aéroport. 
+                  <strong className="text-white"> 6 à 12 minutes</strong> au dépose minute de l'aéroport, selon le stationnement attribué et les disponibilités. 
                   À partir de <strong className="text-green-400">25€ la semaine</strong> avec 3 jours offerts.
                 </p>
                 <div className="flex flex-wrap gap-3">
                   {[
                     'Navette gratuite',
                     'Parking sécurisé et clos',
-                    '98 avis 5 étoiles Google',
-                    'À 12 min de l\'aéroport BVA',
+                    '99 avis 5 étoiles sur 102 avis GMB',
+                    'À 6-12 min de l\'aéroport BVA',
                   ].map((tag) => (
                     <span
                       key={tag}
@@ -259,7 +259,7 @@ export function Features() {
             {[
               { step: '1', title: 'Réservez', desc: 'Choisissez vos dates et réservez en ligne en 2 minutes' },
               { step: '2', title: 'Arrivez', desc: 'Venez garer votre véhicule à notre parking sécurisé' },
-              { step: '3', title: 'Navette', desc: 'Notre navette vous dépose à l\'aéroport en 12 min' },
+              { step: '3', title: 'Navette', desc: 'Notre navette vous dépose à l\'aéroport en 6-12 min selon stationnement' },
               { step: '4', title: 'Retour', desc: 'Appelez-nous à votre retour, on vient vous chercher' },
             ].map((item, index) => (
               <motion.div

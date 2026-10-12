@@ -203,7 +203,7 @@ export function Comparison() {
               <tbody className="divide-y divide-gray-100">
                 {[
                   { label: 'Prix 7 jours', values: ['128€', '78€', '35€', '25€ ✨'] },
-                  { label: 'Distance aéroport', values: ['2 min à pied', '10 min à pied', '5 min navette', '12 min navette'] },
+                  { label: 'Distance aéroport', values: ['2 min à pied', '10 min à pied', '5 min navette', '6-12 min navette'] },
                   { label: 'Type de navette', values: ['—', '—', 'Thermique', 'Électrique ✨'] },
                   { label: 'Jours offerts', values: ['Non', 'Non', 'Non', '3 jours ✨'] },
                 ].map((row, i) => (

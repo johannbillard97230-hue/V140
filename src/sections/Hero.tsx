@@ -79,7 +79,7 @@ export function Hero() {
               className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 mb-6"
             >
               <span className="flex h-2 w-2 rounded-full bg-green-400 animate-pulse" />
-              <span className="text-sm font-medium">Parking sécurisé — 20 places couvertes sur 26</span>
+              <span className="text-sm font-medium">Parking sécurisé — places en majorité couvertes</span>
             </motion.div>
 
             {/* Title */}
@@ -107,7 +107,7 @@ export function Hero() {
               transition={{ delay: 0.4 }}
               className="text-lg text-white/80 mb-8 max-w-xl"
             >
-              Stationnez votre véhicule dans un parking sécurisé — 26 places dont 20 couvertes — à environ 6 ou 12 minutes de l'aéroport,
+              Stationnez votre véhicule dans un parking sécurisé — places en majorité couvertes — à environ 6 ou 12 minutes de l'aéroport,
               selon le stationnement attribué et les disponibilités. Navette aller-retour incluse dans toutes les réservations,
               avec prise en charge adaptée à vos horaires de vol, dès 4 h du matin.
               Prix transparent : <span className="text-green-400 font-bold">25 € TTC pour 7 jours</span>, sans frais cachés.
@@ -121,7 +121,7 @@ export function Hero() {
               className="flex flex-wrap gap-4 mb-8"
             >
               {[
-                { icon: Shield, text: '20 places couvertes sur 26' },
+                { icon: Shield, text: 'Places en majorité couvertes' },
                 { icon: Zap, text: 'Navette aller-retour incluse' },
                 { icon: Clock, text: 'Prise en charge dès 4 h' },
                 { icon: Calendar, text: '7 j/7, jours fériés' },

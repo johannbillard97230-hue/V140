@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Calendar, Shield, Zap, ChevronRight, Minus, Plus, Gift, Mail } from 'lucide-react';
+import { Calendar, Shield, Zap, Clock, ChevronRight, Minus, Plus, Gift, Mail } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Switch } from '@/components/ui/switch';
@@ -79,7 +79,7 @@ export function Hero() {
               className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 mb-6"
             >
               <span className="flex h-2 w-2 rounded-full bg-green-400 animate-pulse" />
-              <span className="text-sm font-medium">Navette 100% électrique disponible</span>
+              <span className="text-sm font-medium">Parking sécurisé — 20 places couvertes sur 26</span>
             </motion.div>
 
             {/* Title */}
@@ -107,9 +107,10 @@ export function Hero() {
               transition={{ delay: 0.4 }}
               className="text-lg text-white/80 mb-8 max-w-xl"
             >
-              Parking Aéroport Beauvais : parking sécurisé avec navette incluse dans la réservation, disponible 24h/24. 
-              Départ tôt, retour tard, sans frais supplémentaires. Économisez jusqu'à <span className="text-green-400 font-bold">70 %</span> sur votre stationnement. 
-              Réservez maintenant : <span className="text-green-400 font-bold">25 € TTC</span> pour 7 jours.
+              Stationnez votre véhicule dans un parking sécurisé — 26 places dont 20 couvertes — à environ 6 ou 12 minutes de l'aéroport,
+              selon le stationnement attribué et les disponibilités. Navette aller-retour incluse dans toutes les réservations,
+              avec prise en charge adaptée à vos horaires de vol, dès 4 h du matin.
+              Prix transparent : <span className="text-green-400 font-bold">25 € TTC pour 7 jours</span>, sans frais cachés.
             </motion.p>
 
             {/* Features */}
@@ -120,9 +121,10 @@ export function Hero() {
               className="flex flex-wrap gap-4 mb-8"
             >
               {[
-                { icon: Shield, text: 'Parking sécurisé' },
-                { icon: Zap, text: 'Navette électrique' },
-                { icon: Calendar, text: 'Réservation flexible' },
+                { icon: Shield, text: '20 places couvertes sur 26' },
+                { icon: Zap, text: 'Navette aller-retour incluse' },
+                { icon: Clock, text: 'Prise en charge dès 4 h' },
+                { icon: Calendar, text: '7 j/7, jours fériés' },
               ].map((feature, index) => (
                 <div
                   key={index}

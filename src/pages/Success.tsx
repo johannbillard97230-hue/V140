@@ -59,7 +59,7 @@ function buildWhatsAppUrl(data: BookingData): string {
   ];
 
   if (days < 7) {
-    lines.push('Navette aller/retour : 10€');
+    lines.push('Forfait Parking court séjour (1 à 6 jours) : 10€');
   } else {
     lines.push('Navette aller/retour : Gratuite');
     lines.push('1 jour offert : -6€');

@@ -12,7 +12,6 @@ import { Partners } from './sections/Partners';
 import { Footer } from './sections/Footer';
 import { Marquee } from './sections/Marquee';
 import { CookieBanner } from './sections/CookieBanner';
-import { SocialProof } from './sections/SocialProof';
 import PaymentPage from './pages/Payment';
 import SuccessPage from './pages/Success';
 
@@ -34,7 +33,6 @@ function HomePage() {
       </main>
       <Footer />
       <CookieBanner />
-      <SocialProof />
     </>
   );
 }

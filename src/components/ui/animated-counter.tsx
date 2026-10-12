@@ -48,19 +48,20 @@ export function AnimatedCounter({
 interface AnimatedStatProps {
   icon: React.ElementType;
   value: string;
+  suffix?: string;
   label: string;
   delay?: number;
   isVisible: boolean;
 }
 
-export function AnimatedStat({ icon: Icon, value, label, delay = 0, isVisible }: AnimatedStatProps) {
+export function AnimatedStat({ icon: Icon, value, suffix: suffixProp, label, delay = 0, isVisible }: AnimatedStatProps) {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: '-50px' });
   
   // Parse value to extract number and suffix
   const match = value.match(/^([\d.]+)(.*)$/);
   const numericValue = match ? parseFloat(match[1]) : 0;
-  const suffix = match ? match[2] : '';
+  const suffix = suffixProp ?? (match ? match[2] : '');
 
   return (
     <motion.div

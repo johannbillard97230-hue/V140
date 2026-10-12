@@ -56,7 +56,7 @@ const stats = [
   { icon: Star, value: '99', label: 'avis 5 étoiles sur 102' },
   { icon: Users, value: '100+', label: 'personnes nous recommandent' },
   { icon: CheckCircle, value: '70%', label: "d'économies" },
-  { icon: Clock, value: '12', suffix: 'min', label: 'de navette' },
+  { icon: Clock, value: '6-12', suffix: ' min', label: 'de navette selon emplacement' },
 ];
 
 export function Features() {

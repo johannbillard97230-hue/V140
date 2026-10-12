@@ -59,9 +59,9 @@ export function AnimatedStat({ icon: Icon, value, suffix: suffixProp, label, del
   const isInView = useInView(ref, { once: true, margin: '-50px' });
   
   // Parse value to extract number and suffix
-  const match = value.match(/^([\d.]+)(.*)$/);
+  const match = value.match(/^([\d.]+)$/); // strict : les valeurs comme '6-12' ou '100+' sont affichées en statique
   const numericValue = match ? parseFloat(match[1]) : 0;
-  const suffix = suffixProp ?? (match ? match[2] : '');
+  const suffix = suffixProp ?? '';
 
   return (
     <motion.div
@@ -88,14 +88,18 @@ export function AnimatedStat({ icon: Icon, value, suffix: suffixProp, label, del
       </motion.div>
       
       <div className="text-4xl lg:text-5xl font-bold text-white mb-2">
-        {isInView ? (
-          <AnimatedCounter 
-            value={numericValue} 
-            suffix={suffix}
-            duration={2}
-          />
+        {match ? (
+          isInView ? (
+            <AnimatedCounter
+              value={numericValue}
+              suffix={suffix}
+              duration={2}
+            />
+          ) : (
+            <span>0{suffix}</span>
+          )
         ) : (
-          <span>0{suffix}</span>
+          <span>{value}{suffix}</span>
         )}
       </div>
       

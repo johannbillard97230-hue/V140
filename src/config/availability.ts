@@ -65,10 +65,10 @@ export function isDateAllowed(date: Date): boolean {
     return septemberAllowedRanges.some((range) => date >= range.from && date <= range.to);
   }
 
-  // October 2026: block 1, 7-11 (12-31 open)
+  // October 2026: block 1, 7-11, 22 (12-31 open except 22)
   if (date.getFullYear() === 2026 && date.getMonth() === 9) {
     const day = date.getDate();
-    if (day === 1 || (day >= 7 && day <= 11)) return false;
+    if (day === 1 || (day >= 7 && day <= 11) || day === 22) return false;
     return true;
   }
 

@@ -14,7 +14,7 @@ const faqItems: FAQItem[] = [
   {
     id: 1,
     question: 'Comment fonctionne la navette électrique ?',
-    answer: "Notre navette 100% électrique vous dépose directement au dépose minute de l'aéroport de Beauvais en seulement 6 à 12 minutes, selon le stationnement attribué et les disponibilités. Elle est incluse dans votre réservation. Notre navette est disponible 24h/24, 7j/7, y compris les jours fériés.",
+    answer: "Notre navette 100% électrique vous dépose directement au dépose minute de l'aéroport de Beauvais en seulement 12 minutes. Elle est incluse dans votre réservation. Notre navette est disponible 24h/24, 7j/7, y compris les jours fériés.",
   },
   {
     id: 2,
@@ -29,7 +29,7 @@ const faqItems: FAQItem[] = [
   {
     id: 4,
     question: "Quelle est l'adresse exacte du parking ?",
-    answer: "Nos parkings sont situés au 8 rue Maurice Segonds, 60000 Beauvais et au 4 rue Pierre Chardeaux 60000 Beauvais. Ils sont facilement accessible depuis l'autoroute A16 (sortie Beauvais Nord). Une fois sur place, notre équipe vous accueille et vous aide à garer votre véhicule avant de vous emmener à l'aéroport avec notre navette.",
+    answer: "Nous disposons de trois sites à Beauvais : un parking extérieur au 4 rue Pierre Chardeaux, un parking couvert au 8 rue Maurice Segonds, et notre nouveau parking couvert de 225 m² au 5 impasse du Clos Baillet — à seulement 6 minutes (2 km) de l'aéroport Paris-Beauvais. Tous sont facilement accessibles depuis l'autoroute A16 (sortie Beauvais Nord). Une fois sur place, notre équipe vous accueille et vous aide à garer votre véhicule avant de vous emmener à l'aéroport avec notre navette.",
   },
   {
     id: 5,

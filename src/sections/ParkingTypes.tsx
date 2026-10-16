@@ -36,16 +36,16 @@ const parkingOptions = [
     ],
   },
   {
-    title: 'Nouveau parking couvert à Beauvais',
+    title: 'Nouveau parking couvert au Clos Baillet',
     image: '/images/parking-couvert-225m2-beauvais-aeroport.png',
-    alt: 'Nouveau parking couvert 225 m² Free Day Parking Beauvais à 6 minutes de l\'aéroport Paris-Beauvais — stationnement proche aéroport BVA',
+    alt: 'Nouveau parking couvert 225 m² Free Day Parking Beauvais au 5 impasse du Clos Baillet à 6 minutes (2 km) de l\'aéroport Paris-Beauvais — stationnement proche aéroport BVA',
     icon: Building2,
-    address: 'Beauvais, à 6 min de l\'aéroport Paris-Beauvais',
+    address: '5 Impasse du Clos Baillet, 60000 Beauvais',
     description:
-      'Découvrez notre nouvel espace de stationnement couvert de 225 m² à Beauvais, situé à environ 6 minutes de l\'aéroport Paris-Beauvais. Une nouvelle solution pour stationner votre véhicule avant votre départ en voyage avec Free Day Parking Beauvais.',
+      'Découvrez notre nouvel espace de stationnement couvert de 225 m² à Beauvais, situé à 6 minutes (2 km) de l\'aéroport Paris-Beauvais. Une nouvelle solution pour stationner votre véhicule avant votre départ en voyage avec Free Day Parking Beauvais.',
     features: [
       'Parking couvert 225 m²',
-      'À 6 minutes de l\'aéroport Paris-Beauvais',
+      'À 6 minutes (2 km) de l\'aéroport',
       'Idéal pour votre départ en voyage',
       'Solution de stationnement proche BVA',
       'Nouvel espace disponible',
@@ -101,7 +101,7 @@ export function ParkingTypes() {
             className="text-lg text-gray-600 max-w-2xl mx-auto"
           >
             Trois options de stationnement disponibles à proximité de l'aéroport de
-            Beauvais-Tillé (BVA) pour répondre à tous vos besoins et budgets.
+            Beauvais-Tillé (BVA), dès 2 km, pour répondre à tous vos besoins et budgets.
           </motion.p>
         </motion.div>
 

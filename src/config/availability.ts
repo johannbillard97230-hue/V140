@@ -68,7 +68,7 @@ export function isDateAllowed(date: Date): boolean {
   // October 2026: block 1, 7-11, 22 (12-31 open except 22)
   if (date.getFullYear() === 2026 && date.getMonth() === 9) {
     const day = date.getDate();
-    if (day === 1 || (day >= 7 && day <= 11) || day === 22 || day === 27) return false;
+    if (day === 1 || (day >= 7 && day <= 11) || day === 22 || day === 26 || day === 27) return false;
     return true;
   }
 

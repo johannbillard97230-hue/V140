@@ -50,7 +50,7 @@ function buildWhatsAppUrl(data: BookingData): string {
     'Atterrissage à Beauvais : ' + data.endTime,
     'Numéro de vol retour : ' + data.returnFlightNumber,
     'Voyageurs : ' + data.travelers,
-    'Bagages : ' + data.bags,
+    'Bagages en soute : ' + data.bags,
     '',
     'Newsletter : ' + (data.newsletter ? 'Oui (-2 jours offerts)' : 'Non'),
     '',

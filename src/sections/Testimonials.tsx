@@ -286,8 +286,8 @@ export function Testimonials() {
             <div className="hidden sm:block w-px h-12 bg-gray-200" />
 
             <div className="text-center sm:text-left">
-              <p className="text-2xl font-bold text-gray-900">102 avis 5 étoiles</p>
-              <p className="text-sm text-gray-500">sur 105 avis GMB</p>
+              <p className="text-2xl font-bold text-gray-900">112 avis 5 étoiles</p>
+              <p className="text-sm text-gray-500">sur 115 avis GMB</p>
             </div>
 
             <div className="hidden sm:block w-px h-12 bg-gray-200" />

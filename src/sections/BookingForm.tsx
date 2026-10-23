@@ -191,7 +191,7 @@ export function BookingForm() {
     if (!formData.billingPostalCode.trim()) newErrors.billingPostalCode = 'Le code postal est obligatoire';
     if (!formData.billingCity.trim()) newErrors.billingCity = 'La ville est obligatoire';
     if (formData.travelers < 1) newErrors.travelers = 'Le nombre de voyageurs est obligatoire';
-    if (formData.bags < 0) newErrors.bags = 'Le nombre de bagages est invalide';
+    if (formData.bags < 0) newErrors.bags = 'Le nombre de bagages en soute est invalide';
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -404,7 +404,7 @@ export function BookingForm() {
               </div>
               <div>
                 <Label className="text-gray-700 mb-2 block">
-                  Nombre de bagages <span className="text-red-500">*</span>
+                  Nombre de bagages en soute <span className="text-red-500">*</span>
                 </Label>
                 <div className="flex items-center gap-3">
                   <button
@@ -589,7 +589,7 @@ export function BookingForm() {
                 <span className="font-medium">{formData.travelers}</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-gray-600">Bagages</span>
+                <span className="text-gray-600">Bagages en soute</span>
                 <span className="font-medium">{formData.bags}</span>
               </div>
               <div className="border-t border-gray-200 pt-3">

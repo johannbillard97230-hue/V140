@@ -53,7 +53,7 @@ const features = [
 ];
 
 const stats = [
-  { icon: Star, value: '102', label: 'avis 5 étoiles sur 105' },
+  { icon: Star, value: '112', label: 'avis 5 étoiles sur 115' },
   { icon: Users, value: '100+', label: 'personnes nous recommandent' },
   { icon: CheckCircle, value: '70%', label: "d'économies" },
   { icon: Clock, value: '6-12', suffix: ' min', label: 'de navette selon emplacement' },
@@ -209,7 +209,7 @@ export function Features() {
               <div className="relative bg-gradient-to-br from-gray-900 to-black flex items-center justify-center p-4 lg:p-6">
                 <img
                   src="/parking-navette-aeroport-beauvais.jpg"
-                  alt="Free Day Parking Beauvais - Parking aéroport pas cher avec navette gratuite aller retour 25€ la semaine 102 avis 5 étoiles sur 105 avis GMB"
+                  alt="Free Day Parking Beauvais - Parking aéroport pas cher avec navette gratuite aller retour 25€ la semaine 112 avis 5 étoiles sur 115 avis GMB"
                   className="w-full h-auto max-h-[400px] lg:max-h-[450px] object-contain rounded-lg"
                   loading="lazy"
                 />
@@ -229,7 +229,7 @@ export function Features() {
                   {[
                     'Navette gratuite',
                     'Parking sécurisé et clos',
-                    '102 avis 5 étoiles sur 105 avis GMB',
+                    '112 avis 5 étoiles sur 115 avis GMB',
                     'À 6-12 min de l\'aéroport BVA',
                   ].map((tag) => (
                     <span

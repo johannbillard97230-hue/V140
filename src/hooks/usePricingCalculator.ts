@@ -7,6 +7,7 @@ const DAILY_RATE_ADDITIONAL = 6;
 export function usePricingCalculator() {
   const [days, setDays] = useState<number>(7);
   const [newsletterSubscribed, setNewsletterSubscribed] = useState<boolean>(false);
+  const [evCharging, setEvCharging] = useState<boolean>(false);
 
   const calculation: PricingCalculation = useMemo(() => {
     const basePrice = days > 0 
@@ -20,12 +21,14 @@ export function usePricingCalculator() {
     const discountDays = days >= 7 ? 1 : 0;
     // Newsletter: always -2 days (-12€) regardless of duration
     const newsletterDiscountDays = newsletterSubscribed ? 2 : 0;
+    // Option recharge électrique : +18€
+    const evChargingFee = evCharging ? 18 : 0;
     
     const totalDiscountDays = discountDays + newsletterDiscountDays;
     const discountAmount = totalDiscountDays * DAILY_RATE_ADDITIONAL;
     
     // Apply discounts as fixed amounts (align with BookingForm.tsx)
-    let finalPrice = basePrice + shuttleFee - discountAmount;
+    let finalPrice = basePrice + shuttleFee - discountAmount + evChargingFee;
     
     // Calculate savings compared to official parking (average 78€ for 7 days)
     const officialParkingPrice = days <= 7 ? 78 : 78 + (days - 7) * 13;
@@ -40,7 +43,7 @@ export function usePricingCalculator() {
       finalPrice,
       savings: Math.max(0, savings),
     };
-  }, [days, newsletterSubscribed]);
+  }, [days, newsletterSubscribed, evCharging]);
 
   const incrementDays = useCallback(() => {
     setDays(prev => Math.min(prev + 1, 30));
@@ -66,5 +69,7 @@ export function usePricingCalculator() {
     setExactDays,
     newsletterSubscribed,
     toggleNewsletter,
+    evCharging,
+    toggleEvCharging: () => setEvCharging(prev => !prev),
   };
 }

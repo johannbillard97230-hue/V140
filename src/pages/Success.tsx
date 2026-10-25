@@ -24,6 +24,7 @@ interface BookingData {
   parkingType: string;
   price: number;
   newsletter: boolean;
+  evCharging?: boolean;
 }
 
 function buildWhatsAppUrl(data: BookingData): string {
@@ -53,6 +54,7 @@ function buildWhatsAppUrl(data: BookingData): string {
     'Bagages en soute : ' + data.bags,
     '',
     'Newsletter : ' + (data.newsletter ? 'Oui (-2 jours offerts)' : 'Non'),
+    'Recharge électrique avant votre retour de voyage : ' + (data.evCharging ? 'OUI (+18€)' : 'NON'),
     '',
     '--- DÉTAIL DU PRIX ---',
     'Parking (' + days + ' jours) : ' + basePrice + '€',
@@ -67,6 +69,10 @@ function buildWhatsAppUrl(data: BookingData): string {
 
   if (data.newsletter) {
     lines.push('Newsletter (2 jours offerts) : -12€');
+  }
+
+  if (data.evCharging) {
+    lines.push('Condition : le client doit laisser les clés de son véhicule et le câble de recharge d\'origine.');
   }
 
   lines.push('');

@@ -23,6 +23,7 @@ interface BookingData {
   parkingType: string;
   price: number;
   newsletter: boolean;
+  evCharging?: boolean;
 }
 
 // API endpoint — Netlify Function
@@ -70,6 +71,7 @@ export default function PaymentPage() {
             endTime: data.endTime,
             travelers: data.travelers,
             bags: data.bags,
+            evCharging: data.evCharging ?? false,
             billingAddress: data.billingAddress,
             billingPostalCode: data.billingPostalCode,
             billingCity: data.billingCity,

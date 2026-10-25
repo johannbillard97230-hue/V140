@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Calendar, Shield, Zap, Clock, ChevronRight, Minus, Plus, Gift, Mail } from 'lucide-react';
+import { Calendar, Shield, Zap, Clock, ChevronRight, Minus, Plus, Gift, Mail, BatteryCharging } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Switch } from '@/components/ui/switch';
@@ -13,7 +13,9 @@ export function Hero() {
     decrementDays, 
     setExactDays,
     newsletterSubscribed, 
-    toggleNewsletter 
+    toggleNewsletter,
+    evCharging,
+    toggleEvCharging
   } = usePricingCalculator();
 
   const scrollToBooking = () => {
@@ -262,6 +264,24 @@ export function Hero() {
                 />
               </div>
 
+              {/* Recharge électrique Toggle */}
+              <div className="flex items-center justify-between p-4 rounded-xl bg-white/5 mb-6">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full bg-green-500/20 flex items-center justify-center">
+                    <BatteryCharging className="w-5 h-5 text-green-400" />
+                  </div>
+                  <div>
+                    <p className="text-sm font-medium text-white">Recharge électrique avant votre retour</p>
+                    <p className="text-xs text-white/60">+18€ · clés et câble d'origine requis</p>
+                  </div>
+                </div>
+                <Switch
+                  checked={evCharging}
+                  onCheckedChange={toggleEvCharging}
+                  className="data-[state=checked]:bg-green-500"
+                />
+              </div>
+
               {/* Price Breakdown */}
               <div className="space-y-3 mb-6">
                 <div className="flex justify-between text-white/70">
@@ -275,6 +295,15 @@ export function Hero() {
                       Jours offerts ({calculation.discountDays + (newsletterSubscribed ? 2 : 0)})
                     </span>
                     <span>-{calculation.discountAmount}€</span>
+                  </div>
+                )}
+                {evCharging && (
+                  <div className="flex justify-between text-white/70">
+                    <span className="flex items-center gap-1">
+                      <BatteryCharging className="w-4 h-4" />
+                      Recharge électrique avant votre retour
+                    </span>
+                    <span>+18€</span>
                   </div>
                 )}
                 <div className="border-t border-white/20 pt-3">

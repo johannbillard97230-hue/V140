@@ -9,6 +9,7 @@ import {
   MapPin,
   Shield,
   Zap,
+  BatteryCharging,
   Plane,
   AlertTriangle
 } from 'lucide-react';
@@ -68,6 +69,7 @@ export function BookingForm() {
     returnFlightNumber: '',
     parkingType: 'outdoor',
     newsletter: false,
+    evCharging: false,
     specialRequests: '',
     billingAddress: '',
     billingPostalCode: '',
@@ -219,6 +221,9 @@ export function BookingForm() {
     if (formData.newsletter) {
       price -= 12;
     }
+    if (formData.evCharging) {
+      price += 18;
+    }
     return Math.max(price, 0);
   };
 
@@ -267,6 +272,7 @@ export function BookingForm() {
       parkingType: formData.parkingType,
       price,
       newsletter: formData.newsletter,
+      evCharging: formData.evCharging,
     };
 
     localStorage.setItem('bookingData', JSON.stringify(bookingData));
@@ -546,6 +552,23 @@ export function BookingForm() {
                 className="data-[state=checked]:bg-green-500"
               />
             </div>
+
+            <div className="flex items-center justify-between p-4 rounded-xl bg-green-50 border border-green-200">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-full bg-green-500/20 flex items-center justify-center">
+                  <BatteryCharging className="w-5 h-5 text-green-600" />
+                </div>
+                <div>
+                  <p className="font-medium text-gray-900">Recharge électrique avant votre retour de voyage (+18 €)</p>
+                  <p className="text-sm text-gray-600">Prestation sous réserve de laisser les clés du véhicule et le câble de recharge d'origine.</p>
+                </div>
+              </div>
+              <Switch
+                checked={formData.evCharging}
+                onCheckedChange={(checked) => updateFormData('evCharging', checked)}
+                className="data-[state=checked]:bg-green-500"
+              />
+            </div>
           </div>
         );
 
@@ -630,6 +653,12 @@ export function BookingForm() {
                   <div className="flex justify-between text-sm">
                     <span className="text-gray-500">Newsletter (2 jours offerts)</span>
                     <span className="text-green-600">-12€</span>
+                  </div>
+                )}
+                {formData.evCharging && (
+                  <div className="flex justify-between text-sm">
+                    <span className="text-gray-500">Recharge électrique avant votre retour de voyage</span>
+                    <span className="text-green-600">+18€</span>
                   </div>
                 )}
               </div>

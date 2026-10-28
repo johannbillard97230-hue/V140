@@ -5,6 +5,7 @@ import { Features } from './sections/Features';
 import { AmazonAffiliate } from './sections/AmazonAffiliate';
 import { ParkingTypes } from './sections/ParkingTypes';
 import { Comparison } from './sections/Comparison';
+import { EvCharging } from './sections/EvCharging';
 import { Testimonials } from './sections/Testimonials';
 import { BookingForm } from './sections/BookingForm';
 import { FAQ } from './sections/FAQ';
@@ -25,6 +26,7 @@ function HomePage() {
         <Features />
         <AmazonAffiliate />
         <ParkingTypes />
+        <EvCharging />
         <Comparison />
         <Testimonials />
         <BookingForm />

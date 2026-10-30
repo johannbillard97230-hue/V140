@@ -194,7 +194,7 @@ export function Hero() {
                     </svg>
                   ))}
                 </div>
-                <p className="text-sm text-white/70 group-hover:text-white group-hover:underline transition-colors">112 avis 5 étoiles sur 115 avis GMB</p>
+                <p className="text-sm text-white/70 group-hover:text-white group-hover:underline transition-colors">113 avis 5 étoiles sur 116 avis GMB</p>
               </a>
             </motion.div>
           </motion.div>

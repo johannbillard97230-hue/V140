@@ -56,6 +56,11 @@ const faqItems: FAQItem[] = [
     question: 'Y a-t-il des frais supplémentaires si nous sommes plus de 3 passagers ?',
     answer: "Non, Free Day Parking Beauvais n'applique aucun frais supplémentaire pour les passagers au-delà de 3 personnes. Le tarif de la réservation reste donc inchangé, même si vous voyagez à 4 personnes ou plus.",
   },
+  {
+    id: 10,
+    question: 'Acceptez-vous les motos et les deux-roues ?',
+    answer: "Oui ! Notre parking moto aéroport de Beauvais accepte les motos, scooters et deux-roues. Le stationnement moto Beauvais se fait dans le même parking sécurisé moto que les voitures : clôture, portail sécurisé et surveillance vidéo 24h/24. Votre deux-roues profite également de la navette aéroport Beauvais incluse dans votre réservation. Avec notre parking deux-roues aéroport Beauvais, partez en voyage l'esprit tranquille, quel que soit votre véhicule.",
+  },
 ];
 
 export function FAQ() {
